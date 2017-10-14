@@ -1,3 +1,9 @@
+/*************************************
+ * Sawannopoly                       *
+ * Autor: IbilisSLZ                  *
+ * Wersja: DEV1.0					 *
+ *************************************/
+
 //Nagłówki z katalogu QtWidgets
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>

@@ -1,0 +1,11 @@
+
+[x] DEV1.x: Uruchamiający się na systemie GNU\Linux program testowy wykorzystujący bibliotekę QT5.
+[ ] DEV2.x: Rozmieszczenie elementów interfejsu rozgrywki (grafiki zastępcze).
+[ ] Pre-Alfa: Implementacja menu głównego programu pozwalającego wybrać tryby gry: wielu graczy w trybie 'gorące krzesło', jeden gracz przeciwko SI, wielu graczy w sieci z użyciem protokołów TCP/IP (lokalnej i być może z pośrednictwem jakiegoś serwera umożliwiającego sprawną komunikację (pridelands.eu?)
+[ ] Alfa 1.0.x: Implementacja podstawowych mechanik trybu gry dla wielu graczy 'gorące krzesło'.
+[ ] Alfa 1.1.x: Stopniowa implementacja grafik.
+[ ] Alfa 1.2.x: Dalsza implementacja dodatkowych mechanik rozgrywki (tryb 'gorącego krzesła).
+[ ] Beta 1.0.x: Implementacja prostego SI i trybu dla jednego gracza (oraz możliwości uzupełnienia brakujących graczy w 'gorącym krześle' przez SI).
+[ ] Beta 1.1.x: Ulepszenia SI (możliwość podejmowania współpracy pomiędzy instancjami SI przeciwko graczom).
+[ ] Gamma 1.0.x: Wprowadzenie trybu gry dla wielu graczy w sieci lokalnej (początkowo dla dwóch serwera i klienta, potem dla wielu klientów).
+[ ] Gamma 1.1.x; Wprowadzenie trybu gry dla wielu graczy z wykorzystaniem sieci globalnej.
