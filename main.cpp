@@ -18,6 +18,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	utworzPola();
 	QApplication Aplikacja(argc, argv);
 	GlowneOkno Okno;
     

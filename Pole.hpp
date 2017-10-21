@@ -11,6 +11,8 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 
+#define SCIEZKA_DO_DANYCH_POL "/home/aleszp/Documents/programowanie/C++/Sawannopoly/pola.csv"
+
 //Deklaracja istnienia klasy Gracz
 class Gracz;
 
@@ -33,6 +35,7 @@ class Pole
 		
 		inline uint8_t podajId(){return id_;}
 		
+		friend std::ostream& operator<<(std::ostream&, Pole&);
 };
 
 
@@ -40,5 +43,6 @@ extern uint8_t licznikPol;
 extern std::vector<Pole> pola;
 
 void utworzPola();
+std::string wytnij(char* zrodlo);
 
 #endif
