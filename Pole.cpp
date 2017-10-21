@@ -58,7 +58,7 @@ void Pole::akcja(Gracz* gracz)
 
 std::ostream& operator<<(std::ostream& wyjscie, Pole& p) 
 {
-	wyjscie<<static_cast<uint16_t>(p.typ_)<<", "<<p.nazwa_;
+	wyjscie<<static_cast<uint16_t>(p.id_)<<": "<<static_cast<uint16_t>(p.typ_)<<", "<<p.nazwa_;
 	for(uint8_t ii=0;ii<6;ii++)
 		wyjscie<<", "<<p.czynsze_[ii];	
 	wyjscie<<", "<<p.terytorium_;
@@ -91,7 +91,7 @@ void utworzPola()
 	uint8_t tmpTerytorium;
 	uint16_t tmpCzynsze[6];
 	//Wczytaj dane w formacie: TypPola, Nazwa pola, Wartość, Cena wywoławcza, czynsze[0-6]
-	while(licznikPol<42)
+	while(licznikPol<41)
 	{
 		if(feof(DanePol))
 		{

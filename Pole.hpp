@@ -39,6 +39,7 @@ class Pole
 		void akcja(Gracz* gracz);
 		
 		inline uint8_t podajId(){return id_;}
+		inline std::string podajNazwe(){return nazwa_;}
 		
 		friend std::ostream& operator<<(std::ostream&, Pole&);
 };
