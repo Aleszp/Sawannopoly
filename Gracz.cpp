@@ -25,3 +25,13 @@ void Gracz::idz_do_pola(Pole* cel)
 {
 	
 }
+
+void Gracz::zabierzPole(uint8_t id)
+{
+	
+}
+
+void Gracz::dajPole(uint8_t id)
+{
+	
+}

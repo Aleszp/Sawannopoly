@@ -22,8 +22,11 @@ class Gracz
 		explicit Gracz();
 		explicit Gracz(std::string imie, uint64_t gotowka);
 		~Gracz();
+		
 		void rusz_o_n_krokow(int8_t n);
 		void idz_do_pola(Pole* cel);
+		void zabierzPole(uint8_t id);
+		void dajPole(uint8_t id);
 };
 
 #endif

@@ -8,8 +8,8 @@ QTFLAGS= -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5
 LIBS= -lQt5Core -lQt5Gui -lQt5Widgets
 
 #Konsolidacja programu
-Sawannopoly:	main.o GlowneOkno.o Gracz.o Pole.o
-		$(CXX) -o Sawannopoly main.o GlowneOkno.o Gracz.o Pole.o $(LIBS) $(CXXFLAGS) $(QTFLAGS)
+Sawannopoly:	main.o GlowneOkno.o Gracz.o Pole.o Bank.o
+		$(CXX) -o Sawannopoly main.o GlowneOkno.o Gracz.o Pole.o Bank.o $(LIBS) $(CXXFLAGS) $(QTFLAGS)
 #Kompilacja wykonywalnej części pprogramu
 main.o:	main.cpp TypyWyliczeniowe.hpp GlowneOkno.hpp
 		$(CXX) -o main.o -c main.cpp $(CXXFLAGS) $(QTFLAGS)
@@ -27,6 +27,9 @@ Gracz.o:	Gracz.cpp Gracz.hpp TypyWyliczeniowe.hpp Pole.hpp
 #Kompilacja implementacji klasy Pole
 Pole.o:	Pole.cpp Pole.hpp TypyWyliczeniowe.hpp
 		$(CXX) -o Pole.o -c Pole.cpp $(CXXFLAGS) $(QTFLAGS)		
+#Kompilacja implementacji banku
+Bank.o:	Bank.cpp Bank.hpp Gracz.hpp
+		$(CXX) -o Bank.o -c Bank.cpp $(CXXFLAGS) $(QTFLAGS)		
 
 
 #Usunięcie efektów kompilacji		
