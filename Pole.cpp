@@ -38,3 +38,8 @@ Pole::~Pole()
 	wlasciciel_->zabierzPole(id_);
 	delete[] czynsze_;
 }
+
+void utworzPola()
+{
+	pola;
+}

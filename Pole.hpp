@@ -6,14 +6,13 @@
 #include <cstdbool>
 #include <string>
 #include <list>
+#include <vector>
 
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 
 //Deklaracja istnienia klasy Gracz
 class Gracz;
-
-extern uint8_t licznikPol;
 
 class Pole
 {
@@ -31,8 +30,15 @@ class Pole
 		explicit Pole();
 		explicit Pole(TypPola typ, std::string nazwa, uint16_t* czynsze);
 		~Pole();
-
+		
+		inline uint8_t podajId(){return id_;}
 		
 };
+
+
+extern uint8_t licznikPol;
+extern std::vector<Pole> pola;
+
+void utworzPola();
 
 #endif

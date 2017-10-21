@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV1.1					 *
+ * Wersja: DEV1.2					 *
  *************************************/
 
 //Nagłówki z katalogu QtWidgets
@@ -20,6 +20,10 @@ int main(int argc, char *argv[])
 {
 	QApplication Aplikacja(argc, argv);
 	GlowneOkno Okno;
+    
+    Gracz test("Test", 150);
+    for(uint8_t ii=0;ii<255;ii++)
+		test.rusz_o_n_krokow(1);
     
     return Aplikacja.exec();
 }
