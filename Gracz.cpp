@@ -37,7 +37,8 @@ void Gracz::rusz_o_n_krokow(int8_t n)
 
 void Gracz::idz_do_pola(uint8_t cel)
 {
-	
+	polozenie_=cel;
+	pola[polozenie_].akcja(this);
 }
 
 void Gracz::zabierzPole(uint8_t id)

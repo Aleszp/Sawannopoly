@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV1.2					 *
+ * Wersja: DEV1.3					 *
  *************************************/
 
 //Nagłówki z katalogu QtWidgets

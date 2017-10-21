@@ -14,6 +14,9 @@ Pole::Pole()
 {
 	typ_=STANDARDOWE;
 	nazwa_="???";
+	wartosc_=0;
+	cena_wywolawcza_=0;
+	terytorium_=0;
 	czynsze_=new uint16_t[6];
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=(uint8_t)0;
@@ -24,10 +27,13 @@ Pole::Pole()
 	licznikPol++;
 }
 
-Pole::Pole(TypPola typ, std::string nazwa, uint16_t* czynsze)
+Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywolawcza, uint16_t* czynsze, uint8_t terytorium)
 {
 	typ_=typ;
 	nazwa_=nazwa;
+	wartosc_=wartosc;
+	cena_wywolawcza_=cena_wywolawcza;
+	terytorium_=terytorium_;
 	czynsze_=new uint16_t[6];
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=czynsze[ii];
@@ -45,13 +51,21 @@ Pole::~Pole()
 	//delete[] czynsze_;
 }
 
+void Pole::akcja(Gracz* gracz)
+{
+	
+}
+
 std::ostream& operator<<(std::ostream& wyjscie, Pole& p) 
 {
 	wyjscie<<static_cast<uint16_t>(p.typ_)<<", "<<p.nazwa_;
 	for(uint8_t ii=0;ii<6;ii++)
 		wyjscie<<", "<<p.czynsze_[ii];	
+	wyjscie<<", "<<p.terytorium_;
 	return wyjscie;
 }
+
+/*********************************************************************/
 
 void utworzPola()
 {
@@ -72,10 +86,12 @@ void utworzPola()
 	
 	TypPola tmpTyp=static_cast<TypPola>(0);
 	char tmpNazwa[64];
+	uint16_t tmpWartosc;
+	uint16_t tmpCenaWywolawcza;
+	uint8_t tmpTerytorium;
 	uint16_t tmpCzynsze[6];
-	
-	//Wczytaj dane w formacie: TypPola, Nazwa pola, czynsze[0-6]
-	while(licznikPol<41)
+	//Wczytaj dane w formacie: TypPola, Nazwa pola, Wartość, Cena wywoławcza, czynsze[0-6]
+	while(licznikPol<42)
 	{
 		if(feof(DanePol))
 		{
@@ -95,13 +111,22 @@ void utworzPola()
 		tmpString=wytnij(tmp);
 		strcpy(tmpNazwa, tmpString.c_str());
 		
+		tmpString=wytnij(tmp);
+		tmpWartosc=atoi(tmpString.c_str());
+		
+		tmpString=wytnij(tmp);
+		tmpCenaWywolawcza=atoi(tmpString.c_str());
+		
+		tmpString=wytnij(tmp);
+		tmpTerytorium=atoi(tmpString.c_str());
+		
 		for(uint8_t ii=0;ii<6;ii++)
 		{
 			tmpString=wytnij(tmp);
 			tmpCzynsze[ii]=atoi(tmpString.c_str());
 		}
 		
-		pola.push_back(Pole(tmpTyp, tmpNazwa, tmpCzynsze));
+		pola.push_back(Pole(tmpTyp, tmpNazwa, tmpWartosc, tmpCenaWywolawcza, tmpCzynsze,tmpTerytorium));
 		std::cout<<pola.back()<<std::endl;
 	}
 	
@@ -118,7 +143,5 @@ std::string wytnij(char* zrodlo)
 	tmpString=tmpString.substr(przesuniecie+1);
 	
 	strcpy(zrodlo, tmpString.c_str());
-	//std::cout<<outString<<"|";
-	//std::cout<<tmpString<<std::endl;
 	return outString;
 }
