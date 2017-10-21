@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_HPP_
-#define MAINWINDOW_HPP_
+#ifndef GLOWNE_OKNO_HPP_
+#define GLOWNE_OKNO_HPP_
 
 //Nagłówki z katalogu QtCore
 #include <QtCore/QtGlobal>

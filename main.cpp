@@ -11,6 +11,8 @@
 //Nagłówki z katalogu programu
 #include "GlowneOkno.hpp"
 #include "TypyWyliczeniowe.hpp"
+#include "Pole.hpp"
+#include "Gracz.hpp"
 
 using namespace std;
 
