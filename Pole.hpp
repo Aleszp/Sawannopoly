@@ -23,10 +23,11 @@ class Pole
 		std::string nazwa_;
 		uint16_t wartosc_;
 		uint16_t cena_wywolawcza_;
-		uint16_t* czynsze_;	//wysokości opłat gdy gracz ma: 1 pole z dzielnicy, wszystkie pola z dzielnicy, jedną lwicę, dwie lwice, trzy lwice, cztery lwice
+		uint16_t czynsze_[6];	//wysokości opłat gdy gracz ma: 1 pole z dzielnicy, wszystkie pola z dzielnicy, jedną lwicę, dwie lwice, trzy lwice, cztery lwice
 		uint8_t lwice;
 		uint8_t id_;
 		uint8_t terytorium_;
+		uint8_t lwice_;
 		bool zastawione_;
 		Gracz* wlasciciel_;
 		std::list<Gracz*> obecniGracze_;	//lista wskaźników na aktualnie stojących tu graczy
@@ -39,6 +40,7 @@ class Pole
 		void akcja(Gracz* gracz);
 		
 		inline uint8_t podajId(){return id_;}
+		inline uint8_t podajLiczbeLwic(){return lwice_;}
 		inline std::string podajNazwe(){return nazwa_;}
 		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel; wlasciciel_->dajPole(id_);}
 		inline Gracz* podajWlasciciela(){return wlasciciel_;}

@@ -17,7 +17,6 @@ Pole::Pole()
 	wartosc_=0;
 	cena_wywolawcza_=0;
 	terytorium_=0;
-	czynsze_=new uint16_t[6];
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=(uint8_t)0;
 	zastawione_=false;
@@ -34,7 +33,6 @@ Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywol
 	wartosc_=wartosc;
 	cena_wywolawcza_=cena_wywolawcza;
 	terytorium_=terytorium_;
-	czynsze_=new uint16_t[6];
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=czynsze[ii];
 	zastawione_=false;
@@ -47,8 +45,7 @@ Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywol
 
 Pole::~Pole()
 {
-	//wlasciciel_->zabierzPole(id_);
-	//delete[] czynsze_;
+
 }
 
 std::ostream& operator<<(std::ostream& wyjscie, Pole& p) 
@@ -72,7 +69,8 @@ void Pole::akcja(Gracz* gracz)
 		{
 			case STANDARDOWE:
 			{
-				
+				//jeśli niczyje - dać wybór między kupnem a licytacją
+				//jeśli innego gracza pobrać czynsz (z uwzględnieniem kompletności terytoriów oraz liczby lwic)
 			}
 			break;
 			case START:	
@@ -89,12 +87,14 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			case UZYTECZNOSC:
 			{
-					
+				//jeśli niczyje - dać wybór między kupnem a licytacją
+				//jeśli innego gracza pobrać czynsz (z uwzględnieniem posiadania będź nie obu ujęć)
 			}
 			break;
 			case GRANICA:
 			{
-					
+				//jeśli niczyje - dać wybór między kupnem a licytacją
+				//jeśli innego gracza pobrać czynsz (z uwzględnieniem posiadania poszczególnych granic)
 			}
 			break;
 			case WYGNANIE:
