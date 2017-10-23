@@ -47,13 +47,8 @@ Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywol
 
 Pole::~Pole()
 {
-	wlasciciel_->zabierzPole(id_);
+	//wlasciciel_->zabierzPole(id_);
 	//delete[] czynsze_;
-}
-
-void Pole::akcja(Gracz* gracz)
-{
-	
 }
 
 std::ostream& operator<<(std::ostream& wyjscie, Pole& p) 
@@ -63,6 +58,65 @@ std::ostream& operator<<(std::ostream& wyjscie, Pole& p)
 		wyjscie<<", "<<p.czynsze_[ii];	
 	wyjscie<<", "<<p.terytorium_;
 	return wyjscie;
+}
+
+void Pole::akcja(Gracz* gracz)
+{
+	if(podajWlasciciela()==gracz)
+	{
+		std::cout<<"To pole należy do gracza "<<gracz->podajImie()<<"."<<std::endl;
+	}
+	else
+	{
+		switch(typ_)
+		{
+			case STANDARDOWE:
+			{
+				
+			}
+			break;
+			case START:	
+				//gotówkę zwiększa funkcja przesuwająca, więc tu nic się nie dzieje
+			break;
+			case LATWA_ZDOBYCZ:
+				//wywołać obsługę Łatwej zdobyczy
+			break;
+			case DLA_DOBRA_STADA:
+				//wywołać obsługę Dla dobra stada
+			break;
+			case POSILEK:
+				gracz->zaplac(wartosc_);
+			break;
+			case UZYTECZNOSC:
+			{
+					
+			}
+			break;
+			case GRANICA:
+			{
+					
+			}
+			break;
+			case WYGNANIE:
+				gracz->ustawWygnanie(true);
+			break;
+			case POGRANICZE:
+				//tu nic się nie dzieje
+			break;
+			case UDAJ_SIE_NA_WYGNANIE:
+			{
+				gracz->idz_do_pola(40);
+				gracz->ustawWygnanie(true);
+			}
+			break;
+			case BEZTROSKI_BAOBAB:
+				//tu nic się nie dzieje
+			break;
+			default:
+				std::cerr<<"Gracz "<<gracz->podajImie()<<" stanął na nieobsługiwanym polu o id: "<<id_<<"."<<std::endl;
+			break;
+		}
+	}
 }
 
 /*********************************************************************/

@@ -1,8 +1,11 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV1.4					 *
+ * Wersja: DEV1.5					 *
  *************************************/
+
+//Standardowe nagłówki C/C++
+#include <iostream>
 
 //Nagłówki z katalogu QtWidgets
 #include <QtWidgets/QApplication>
@@ -23,9 +26,18 @@ int main(int argc, char *argv[])
 	GlowneOkno Okno;
     
     Gracz test("Test", 150);
+    pola[7].ustawWlasciciela(&test);
     for(uint8_t ii=0;ii<255;ii++)
+    {
+		if(test.podajWygnanie())
+		{
+			test.obnizWygnanie();
+			std::cout<<"Gracz "<<test.podajImie()<<" jest na wygnaniu."<<std::endl;
+			continue;
+		}
 		test.rusz_o_n_krokow(1);
+	}
     
-    return Aplikacja.exec();
+    return 0; //Aplikacja.exec();
 }
 

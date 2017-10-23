@@ -10,11 +10,11 @@
 
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
+#include "Gracz.hpp"
 
 #define SCIEZKA_DO_DANYCH_POL "/home/aleszp/Documents/programowanie/C++/Sawannopoly/pola.csv"
 
 //Deklaracja istnienia klasy Gracz
-class Gracz;
 
 class Pole
 {
@@ -40,6 +40,8 @@ class Pole
 		
 		inline uint8_t podajId(){return id_;}
 		inline std::string podajNazwe(){return nazwa_;}
+		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel; wlasciciel_->dajPole(id_);}
+		inline Gracz* podajWlasciciela(){return wlasciciel_;}
 		
 		friend std::ostream& operator<<(std::ostream&, Pole&);
 };
