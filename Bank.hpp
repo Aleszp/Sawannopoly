@@ -4,6 +4,6 @@
 //Nagłówki z katalogu programu
 #include "Gracz.hpp"
 
-extern Gracz* bank;
+extern Gracz bank;
 
 #endif

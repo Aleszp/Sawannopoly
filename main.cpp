@@ -1,11 +1,13 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.0					 *
+ * Wersja: DEV2.1					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 //Nagłówki z katalogu QtWidgets
 #include <QtWidgets/QApplication>
@@ -21,6 +23,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	srand (time (NULL));
+	
 	utworzPola();
 	QApplication Aplikacja(argc, argv);
 	GlowneOkno Okno;
@@ -35,7 +39,7 @@ int main(int argc, char *argv[])
 			std::cout<<"Gracz "<<test.podajImie()<<" jest na wygnaniu."<<std::endl;
 			continue;
 		}
-		test.rusz_o_n_krokow(1);
+		test.rusz_o_n_krokow(1+rand ()%12);
 	}
     
     return 0; //Aplikacja.exec();
