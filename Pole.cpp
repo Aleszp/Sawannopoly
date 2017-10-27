@@ -12,6 +12,7 @@ std::vector<Pole> pola;
 
 Pole::Pole()
 {
+	id_=licznikPol;
 	typ_=STANDARDOWE;
 	nazwa_="???";
 	wartosc_=0;
@@ -21,23 +22,24 @@ Pole::Pole()
 		czynsze_[ii]=(uint8_t)0;
 	zastawione_=false;
 	wlasciciel_=&bank;
-	id_=licznikPol;
+	lwice_=0;
 	
 	licznikPol++;
 }
 
 Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywolawcza, uint16_t* czynsze, uint8_t terytorium)
 {
+	id_=licznikPol;
 	typ_=typ;
 	nazwa_=nazwa;
 	wartosc_=wartosc;
 	cena_wywolawcza_=cena_wywolawcza;
-	terytorium_=terytorium_;
+	terytorium_=terytorium;
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=czynsze[ii];
 	zastawione_=false;
 	wlasciciel_=&bank;
-	id_=licznikPol;
+	lwice_=0;
 	
 	licznikPol++;
 }
@@ -48,7 +50,7 @@ Pole::~Pole()
 
 }
 
-std::ostream& operator<<(std::ostream& wyjscie, Pole& p) 
+std::ostream& operator<<(std::ostream& wyjscie, Pole& p)
 {
 	wyjscie<<static_cast<uint16_t>(p.id_)<<": "<<static_cast<uint16_t>(p.typ_)<<", "<<p.nazwa_;
 	for(uint8_t ii=0;ii<6;ii++)
@@ -61,26 +63,52 @@ void Pole::akcja(Gracz* gracz)
 {
 	if(podajWlasciciela()==gracz)
 	{
-		std::cout<<"To pole należy do gracza "<<gracz->podajImie()<<"."<<std::endl;
+		std::cout<<"To pole należy do gracza "<<wlasciciel_->podajImie()<<"."<<std::endl;
 	}
 	else
 	{
+		if(podajWlasciciela()!=&bank)
+		{
+			std::cout<<"To pole należy do gracza "<<wlasciciel_->podajImie()<<"."<<std::endl;
+		}
 		switch(typ_)
 		{
 			case STANDARDOWE:
 			{
-				//jeśli niczyje - dać wybór między kupnem a licytacją
-				//jeśli innego gracza pobrać czynsz (z uwzględnieniem kompletności terytoriów oraz liczby lwic)
+				if(wlasciciel_==&bank) 	//jeśli niczyje - dać wybór między kupnem a licytacją
+				{
+					
+				}
+				else //jeśli innego gracza pobrać czynsz (z uwzględnieniem kompletności terytoriów oraz liczby lwic)
+				{
+					
+					uint16_t kwota=czynsze_[0];
+					
+					if(sprawdz_kompletnosc_terytorium(this))
+					{
+						std::cout<<"To pole stanowi kompletne terytorium ";
+						if(lwice_>0)
+							std::cout<<"obstawione przez "<<(uint16_t)podajLiczbeLwic()<<" lwice(ę).";
+						std::cout<<std::endl;
+						kwota=czynsze_[1+lwice_];
+					}
+					std::cout<<"Kwota do zapłaty wynosi "<<kwota<<" żuczki(ów)."<<std::endl;
+					gracz->zaplac(kwota, wlasciciel_);
+				}
 			}
 			break;
 			case START:	
 				//gotówkę zwiększa funkcja przesuwająca, więc tu nic się nie dzieje
 			break;
 			case LATWA_ZDOBYCZ:
+			{
 				//wywołać obsługę Łatwej zdobyczy
+			}
 			break;
 			case DLA_DOBRA_STADA:
+			{
 				//wywołać obsługę Dla dobra stada
+			}
 			break;
 			case POSILEK:
 				gracz->zaplac(wartosc_);
@@ -198,4 +226,19 @@ std::string wytnij(char* zrodlo)
 	
 	strcpy(zrodlo, tmpString.c_str());
 	return outString;
+}
+
+bool sprawdz_kompletnosc_terytorium(const Pole* const  pole)
+{
+	for(uint8_t ii=0;ii<40;ii++)
+	{
+		if(pola[ii].podajTerytorium()==pole->podajTerytorium())
+		{
+			if(pola[ii].podajWlasciciela()!=pole->podajWlasciciela())
+			{
+				return false;
+			}
+		}
+	}
+	return true;
 }

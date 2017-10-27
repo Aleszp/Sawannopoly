@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.3					 *
+ * Wersja: DEV2.5					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -30,7 +30,15 @@ int main(int argc, char *argv[])
 	GlowneOkno Okno;
     
     Gracz test("Test", 150);
-    pola[7].ustawWlasciciela(&test);
+    Gracz test2("Królowa", 150);
+    
+    pola[8].ustawWlasciciela(&test);
+    pola[9].ustawWlasciciela(&test2);
+    
+    pola[1].ustawWlasciciela(&test2);
+    pola[3].ustawLwice(1);
+    pola[3].ustawWlasciciela(&test2);
+    pola[13].ustawWlasciciela(&test2);
     for(uint8_t ii=0;ii<255;ii++)
     {
 		if(test.podajWygnanie())

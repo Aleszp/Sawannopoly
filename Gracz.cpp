@@ -37,7 +37,7 @@ void Gracz::rusz_o_n_krokow(int8_t n)
 		gotowka_+=20;
 		polozenie_-=40;
 	}
-	std::cerr<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<(pola[polozenie_].podajNazwe())<<") mając "<<gotowka_<<" żuczków."<<std::endl;
+	std::cerr<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<(pola[polozenie_].podajNazwe())<<") z terytorium "<<(uint16_t)pola[polozenie_].podajTerytorium()<<" mając "<<gotowka_<<" żuczków."<<std::endl;
 	pola[polozenie_].akcja(this);
 }
 
@@ -103,7 +103,21 @@ void Gracz::rzutKoscia()
 	rusz_o_n_krokow(wynik[0]+wynik[1]);
 }
 
-bool Gracz::czyMaPole(uint8_t id)
+void Gracz::zaplac(uint16_t kwota, Gracz* komu)
+{
+	if(gotowka_>=kwota)
+	{
+		gotowka_-=kwota;
+		komu->dodajGotowke(kwota);
+	}
+	else
+	{
+		//wymuś pozyskanie gotówki
+		//lub ogłoś bankructwo
+	}
+}
+
+bool Gracz::czyMaPole(uint8_t id) 
 {
 	std::list<uint8_t>::iterator it = find (nieruchomosci_.begin(), nieruchomosci_.end(), id);
 	if (it != nieruchomosci_.end())

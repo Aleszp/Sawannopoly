@@ -39,12 +39,14 @@ class Pole
 		
 		void akcja(Gracz* gracz);
 		
-		inline uint8_t podajId(){return id_;}
-		inline uint8_t podajLiczbeLwic(){return lwice_;}
-		inline std::string podajNazwe(){return nazwa_;}
-		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel; wlasciciel_->dajPole(id_);}
-		inline Gracz* podajWlasciciela(){return wlasciciel_;}
+		inline uint8_t podajId()const{return id_;}
+		inline uint8_t podajLiczbeLwic()const{return lwice_;}
+		inline uint8_t podajTerytorium()const{return terytorium_;}
+		inline std::string podajNazwe()const{return nazwa_;}
+		inline Gracz* podajWlasciciela()const{return wlasciciel_;}
 		
+		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel; wlasciciel_->dajPole(id_);}
+		inline void ustawLwice(uint8_t lwice){lwice_=lwice;}
 		friend std::ostream& operator<<(std::ostream&, Pole&);
 };
 
@@ -53,6 +55,7 @@ extern uint8_t licznikPol;
 extern std::vector<Pole> pola;
 
 void utworzPola();
+bool sprawdz_kompletnosc_terytorium(const Pole* const pole);
 std::string wytnij(char* zrodlo);
 
 #endif

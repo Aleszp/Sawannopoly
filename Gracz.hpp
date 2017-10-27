@@ -34,13 +34,16 @@ class Gracz
 		void zaplac(uint16_t kwota);
 		void ustawWygnanie(bool wygnany);
 		void rzutKoscia();
+		void zaplac(uint16_t kwota, Gracz* komu);
 		
 		bool czyMaPole(uint8_t id);
 		
-		inline uint8_t gdzieJest(){return polozenie_;}
-		inline std::string podajImie(){return imie_;}
-		inline uint8_t podajWygnanie(){return wygnany_;}
+		inline uint8_t gdzieJest()const{return polozenie_;}
+		inline std::string podajImie()const{return imie_;}
+		inline uint8_t podajWygnanie()const{return wygnany_;}
+		
 		inline void obnizWygnanie(){wygnany_--; if(wygnany_==0) ustawWygnanie(false);}
+		inline void dodajGotowke(uint16_t kwota){gotowka_+=kwota;}
 };
 
 #endif
