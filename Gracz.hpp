@@ -20,6 +20,7 @@ class Gracz
 		uint8_t polozenie_;
 		std::list<uint8_t> nieruchomosci_;
 		uint8_t wygnany_;
+		uint8_t licznikDubletu_;
 
 	public:
 		explicit Gracz();
@@ -32,6 +33,8 @@ class Gracz
 		void dajPole(uint8_t id);
 		void zaplac(uint16_t kwota);
 		void ustawWygnanie(bool wygnany);
+		void rzutKoscia();
+		
 		bool czyMaPole(uint8_t id);
 		
 		inline uint8_t gdzieJest(){return polozenie_;}

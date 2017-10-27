@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.1					 *
+ * Wersja: DEV2.2					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			std::cout<<"Gracz "<<test.podajImie()<<" jest na wygnaniu."<<std::endl;
 			continue;
 		}
-		test.rusz_o_n_krokow(1+rand ()%12);
+		test.rzutKoscia();
 	}
     
     return 0; //Aplikacja.exec();
