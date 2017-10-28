@@ -48,6 +48,16 @@ void uzyjKarty(Karta karta, Gracz* gracz)
 	
 }
 
+void Karta::opisz()
+{
+	for(uint8_t ii=0;ii<3;ii++)
+	{
+		std::cout<<"Efekt["<<(uint16_t)ii<<"]: "<<(uint16_t)efekty_[ii]<<", liczba["<<(uint16_t)ii<<"]: "<<(uint16_t)liczby_[ii]<<"; ";
+	}		
+	std::cout<<"OPIS: "<<opis_<<std::endl;
+	
+}
+
 void wczytajKarty()
 {
 	FILE* daneKart=fopen(SCIEZKA_DO_DANYCH_KART,"r");
@@ -81,7 +91,7 @@ void wczytajKarty()
 		tmpString=wytnij(tmp);
 		tmpTyp=static_cast<TypKarty>(atoi(tmpString.c_str()));
 		
-		for(uint8_t ii=0;ii<2;ii++)
+		for(uint8_t ii=0;ii<3;ii++)
 		{
 			tmpString=wytnij(tmp);
 			tmpEfekty[ii]=static_cast<EfektKarty>(atoi(tmpString.c_str()));

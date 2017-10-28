@@ -25,6 +25,8 @@ class Karta
 		explicit Karta();
 		explicit Karta(EfektKarty* efekty, int16_t* liczby, std::string opis);
 		~Karta();
+		
+		void opisz();
 };
 
 void losujKarte(TypKarty talia, Gracz* gracz);
