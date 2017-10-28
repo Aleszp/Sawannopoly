@@ -103,14 +103,14 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			case LATWA_ZDOBYCZ:
 			{
-				//losujKarte(karty[KARTY_LATWEJ_ZDOBYCZY], gracz);
+				losujKarte(KARTY_LATWEJ_ZDOBYCZY, gracz);
 				//wywołać obsługę Łatwej zdobyczy
 			}
 			break;
 			case DLA_DOBRA_STADA:
 			{
 				//wywołać obsługę Dla dobra stada
-				//losujKarte(karty[KARTY_DLA_DOBRA_STADA], gracz);
+				losujKarte(KARTY_DLA_DOBRA_STADA, gracz);
 			}
 			break;
 			case POSILEK:
@@ -129,7 +129,7 @@ void Pole::akcja(Gracz* gracz)
 			}
 			break;
 			case WYGNANIE:
-				//gracz->ustawWygnanie(true);	//tylko teoretycznie, w praktyce nigdy nie zajdzie
+				//tu nic się nie dzieje
 			break;
 			case POGRANICZE:
 				//tu nic się nie dzieje

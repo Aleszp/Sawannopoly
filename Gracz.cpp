@@ -6,17 +6,7 @@
 #include "Gracz.hpp"
 #include "Pole.hpp"
 
-Gracz::Gracz()
-{
-	imie_="???";
-	gotowka_=0;
-	polozenie_=0;
-	wygnany_=0;
-	licznikDubletu_=0;
-	wolne_lwice_=0;
-}
-
-Gracz::Gracz(std::string imie, uint64_t gotowka)
+Gracz::Gracz(std::string imie="???", uint64_t gotowka=0)
 {
 	imie_=imie;
 	gotowka_=gotowka;
@@ -24,6 +14,7 @@ Gracz::Gracz(std::string imie, uint64_t gotowka)
 	wygnany_=false;
 	licznikDubletu_=0;
 	wolne_lwice_=0;
+	karta_powrotu_z_wygnania_=false;
 }
 
 Gracz::~Gracz()
