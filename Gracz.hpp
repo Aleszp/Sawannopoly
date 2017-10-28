@@ -22,8 +22,6 @@ class Gracz
 		uint8_t wygnany_;
 		uint8_t licznikDubletu_;
 		uint8_t wolne_lwice_;
-		bool wyprzedaje_;
-		bool bankrut_;
 
 	public:
 		explicit Gracz();

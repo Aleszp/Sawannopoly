@@ -1,3 +1,3 @@
 #include "Bank.hpp"
 
-Gracz bank("Bank", UINT64_MAX);
+Gracz bank("Bank", UINT64_MAX/2);

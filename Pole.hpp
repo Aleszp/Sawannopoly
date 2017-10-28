@@ -40,6 +40,8 @@ class Pole
 		~Pole();
 		
 		void akcja(Gracz* gracz);
+		void pozyskajLwice();
+		void zwolnijLwice();
 		void dodajLwice();
 		void odejmijLwice();
 		

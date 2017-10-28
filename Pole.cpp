@@ -6,6 +6,7 @@
 //Nagłówki z katalogu programu
 #include "Pole.hpp"
 #include "Bank.hpp"
+#include "Karta.hpp"
 
 uint8_t licznikPol=0;
 std::vector<Pole> pola;
@@ -102,12 +103,14 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			case LATWA_ZDOBYCZ:
 			{
+				//losujKarte(karty[KARTY_LATWEJ_ZDOBYCZY], gracz);
 				//wywołać obsługę Łatwej zdobyczy
 			}
 			break;
 			case DLA_DOBRA_STADA:
 			{
 				//wywołać obsługę Dla dobra stada
+				//losujKarte(karty[KARTY_DLA_DOBRA_STADA], gracz);
 			}
 			break;
 			case POSILEK:
@@ -126,14 +129,13 @@ void Pole::akcja(Gracz* gracz)
 			}
 			break;
 			case WYGNANIE:
-				gracz->ustawWygnanie(true);
+				//gracz->ustawWygnanie(true);	//tylko teoretycznie, w praktyce nigdy nie zajdzie
 			break;
 			case POGRANICZE:
 				//tu nic się nie dzieje
 			break;
 			case UDAJ_SIE_NA_WYGNANIE:
 			{
-				gracz->idz_do_pola(40);
 				gracz->ustawWygnanie(true);
 			}
 			break;

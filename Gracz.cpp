@@ -13,8 +13,6 @@ Gracz::Gracz()
 	polozenie_=0;
 	wygnany_=0;
 	licznikDubletu_=0;
-	wyprzedaje_=false;
-	bankrut_=false;
 	wolne_lwice_=0;
 }
 
@@ -25,8 +23,6 @@ Gracz::Gracz(std::string imie, uint64_t gotowka)
 	polozenie_=0;
 	wygnany_=false;
 	licznikDubletu_=0;
-	wyprzedaje_=false;
-	bankrut_=false;
 	wolne_lwice_=0;
 }
 
@@ -67,7 +63,10 @@ void Gracz::dajPole(uint8_t id)
 void Gracz::ustawWygnanie(bool wygnany)
 {
 	if(wygnany) 
+	{
+		idz_do_pola(40);
 		wygnany_=3; 
+	}
 	else 
 	{
 		wygnany_=0;
@@ -90,7 +89,6 @@ void Gracz::rzutKoscia()
 		if(licznikDubletu_==3)
 		{
 			std::cout<<"Wygnanie za potrójny dublet!"<<std::endl;
-			idz_do_pola(40);
 			ustawWygnanie(true);
 			licznikDubletu_=0;
 			return;

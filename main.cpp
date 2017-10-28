@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.6					 *
+ * Wersja: DEV2.7					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -49,6 +49,8 @@ int main(int argc, char *argv[])
 		}
 		test.rzutKoscia();
 	}
+	
+	std::cerr<<"Koniec"<<std::endl;
     
     return 0; //Aplikacja.exec();
 }
