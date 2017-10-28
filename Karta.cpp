@@ -34,7 +34,7 @@ Karta::~Karta()
 	
 }
 
-void losujKarte(TypyKart talia, Gracz* gracz)
+void losujKarte(TypKarty talia, Gracz* gracz)
 {
 	
 	Karta karta;
@@ -61,32 +61,36 @@ void wczytajKarty()
 	}
 	
 	char tmp[1024];
+	std::string tmpString;
+	TypKarty tmpTyp;
+	EfektKarty tmpEfekty[3];
+	int16_t tmpLiczby[3];
+	std::string tmpOpis;
+	
+	//dane w formacie: TypKarty, dla i=0..2 (Efekt[i], Liczba[i]), opis
 	
 	while(!feof(daneKart))
 	{
-		TypyKart tmpTyp=KARTY_LATWEJ_ZDOBYCZY;
+		
 		//tu odczyt danych o karcie
 		
 		fgets(tmp,1024,daneKart);
 		if(tmp[0]=='#')	//jeśli linijka stanowi komentarz
 			continue;
 			
-		/*tmpString=wytnij(tmp);
-		tmpTyp=static_cast<TypPola>(atoi(tmpString.c_str()));
 		tmpString=wytnij(tmp);
-		strcpy(tmpNazwa, tmpString.c_str());
+		tmpTyp=static_cast<TypKarty>(atoi(tmpString.c_str()));
 		
-		tmpString=wytnij(tmp);
-		tmpWartosc=atoi(tmpString.c_str());
+		for(uint8_t ii=0;ii<2;ii++)
+		{
+			tmpString=wytnij(tmp);
+			tmpEfekty[ii]=static_cast<EfektKarty>(atoi(tmpString.c_str()));
+			tmpString=wytnij(tmp);
+			tmpLiczby[ii]=atoi(tmpString.c_str());
+		}		
+		tmpOpis=tmp;
 		
-		tmpString=wytnij(tmp);
-		tmpCenaWywolawcza=atoi(tmpString.c_str());
-		
-		tmpString=wytnij(tmp);
-		tmpTerytorium=atoi(tmpString.c_str());*/
-		
-		
-		karty[tmpTyp].push_back(Karta());
+		karty[tmpTyp].push_back(Karta(tmpEfekty,tmpLiczby,tmpOpis));
 	}
 	
 	fclose(daneKart);

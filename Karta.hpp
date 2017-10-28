@@ -27,7 +27,7 @@ class Karta
 		~Karta();
 };
 
-void losujKarte(TypyKart talia, Gracz* gracz);
+void losujKarte(TypKarty talia, Gracz* gracz);
 void uzyjKarty(Karta karta, Gracz* gracz);
 
 void wczytajKarty();
