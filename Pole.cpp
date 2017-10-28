@@ -111,7 +111,7 @@ void Pole::akcja(Gracz* gracz)
 			}
 			break;
 			case POSILEK:
-				gracz->zaplac(wartosc_);
+				gracz->zaplac(wartosc_,&bank);
 			break;
 			case UZYTECZNOSC:
 			{
@@ -146,6 +146,36 @@ void Pole::akcja(Gracz* gracz)
 		}
 	}
 }
+
+void Pole::dodajLwice()
+{
+	if(czyMoznaDodacLwice())
+	{
+		lwice_++;
+		wlasciciel_->dodajLwice(-1);
+		wlasciciel_->zaplac(KOSZT_USTAWIENIA_LWICY,&bank);
+	}
+	else
+	{
+		
+	}
+}
+
+void Pole::odejmijLwice()
+{
+	lwice_--;
+	wlasciciel_->dodajLwice(+1);
+	wlasciciel_->dodajGotowke((KOSZT_USTAWIENIA_LWICY*4)/5);
+}
+		
+bool Pole::czyMoznaDodacLwice()
+{
+	if((wlasciciel_->podajGotowke()>KOSZT_USTAWIENIA_LWICY) && (wlasciciel_->podajLiczbeWolnychLwic()>0) && (lwice_<4))
+		return true;
+	else	
+		return false;
+}
+
 
 /*********************************************************************/
 

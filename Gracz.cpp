@@ -13,6 +13,9 @@ Gracz::Gracz()
 	polozenie_=0;
 	wygnany_=0;
 	licznikDubletu_=0;
+	wyprzedaje_=false;
+	bankrut_=false;
+	wolne_lwice_=0;
 }
 
 Gracz::Gracz(std::string imie, uint64_t gotowka)
@@ -22,6 +25,9 @@ Gracz::Gracz(std::string imie, uint64_t gotowka)
 	polozenie_=0;
 	wygnany_=false;
 	licznikDubletu_=0;
+	wyprzedaje_=false;
+	bankrut_=false;
+	wolne_lwice_=0;
 }
 
 Gracz::~Gracz()
@@ -56,11 +62,6 @@ void Gracz::dajPole(uint8_t id)
 {
 	nieruchomosci_.remove(id);
 	nieruchomosci_.push_back(id);
-}
-
-void Gracz::zaplac(uint16_t kwota)
-{
-	
 }
 
 void Gracz::ustawWygnanie(bool wygnany)
@@ -112,9 +113,30 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 	}
 	else
 	{
-		//wymuś pozyskanie gotówki
-		//lub ogłoś bankructwo
+		if(wymus_gotowke(kwota))
+		{	
+			gotowka_-=kwota;
+			komu->dodajGotowke(kwota);
+		}
+		else
+		{
+			bankrutuj_na_rzecz(komu);
+		}
 	}
+}
+
+void Gracz::bankrutuj_na_rzecz(Gracz* komu)
+{
+	
+}
+
+bool Gracz::wymus_gotowke(uint16_t kwota)
+{
+	while(gotowka_<=kwota)
+	{
+		
+	}
+	return false;
 }
 
 bool Gracz::czyMaPole(uint8_t id) 

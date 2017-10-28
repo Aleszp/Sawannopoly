@@ -14,6 +14,8 @@
 
 #define SCIEZKA_DO_DANYCH_POL "/home/aleszp/Documents/programowanie/C++/Sawannopoly/pola.csv"
 
+static const uint8_t KOSZT_USTAWIENIA_LWICY=15;
+
 //Deklaracja istnienia klasy Gracz
 
 class Pole
@@ -38,6 +40,10 @@ class Pole
 		~Pole();
 		
 		void akcja(Gracz* gracz);
+		void dodajLwice();
+		void odejmijLwice();
+		
+		bool czyMoznaDodacLwice();
 		
 		inline uint8_t podajId()const{return id_;}
 		inline uint8_t podajLiczbeLwic()const{return lwice_;}
