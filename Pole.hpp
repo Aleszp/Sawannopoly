@@ -64,6 +64,5 @@ extern std::vector<Pole> pola;
 
 void utworzPola();
 bool sprawdz_kompletnosc_terytorium(const Pole* const pole);
-std::string wytnij(char* zrodlo);
 
 #endif

@@ -5,6 +5,7 @@
 
 //Nagłówki z katalogu programu
 #include "Karta.hpp"
+#include "inne.hpp"
 
 std::list<Karta>karty[2];
 
@@ -56,15 +57,36 @@ void wczytajKarty()
 	{
 		fprintf(stderr,"Błąd otwarcie pliku bazy danych kart.\n");
 		fprintf(stderr,"Sprawdź, czy plik %s istnieje.\n",SCIEZKA_DO_DANYCH_KART);
-		exit(2);
+		exit(3);
 	}
+	
+	char tmp[1024];
 	
 	while(!feof(daneKart))
 	{
 		TypyKart tmpTyp=KARTY_LATWEJ_ZDOBYCZY;
 		//tu odczyt danych o karcie
-		Karta tmpKarta; //(dane tymczasowe)
-		karty[tmpTyp].push_back(tmpKarta);
+		
+		fgets(tmp,1024,daneKart);
+		if(tmp[0]=='#')	//jeśli linijka stanowi komentarz
+			continue;
+			
+		/*tmpString=wytnij(tmp);
+		tmpTyp=static_cast<TypPola>(atoi(tmpString.c_str()));
+		tmpString=wytnij(tmp);
+		strcpy(tmpNazwa, tmpString.c_str());
+		
+		tmpString=wytnij(tmp);
+		tmpWartosc=atoi(tmpString.c_str());
+		
+		tmpString=wytnij(tmp);
+		tmpCenaWywolawcza=atoi(tmpString.c_str());
+		
+		tmpString=wytnij(tmp);
+		tmpTerytorium=atoi(tmpString.c_str());*/
+		
+		
+		karty[tmpTyp].push_back(Karta());
 	}
 	
 	fclose(daneKart);

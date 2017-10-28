@@ -7,6 +7,7 @@
 #include "Pole.hpp"
 #include "Bank.hpp"
 #include "Karta.hpp"
+#include "inne.hpp"
 
 uint8_t licznikPol=0;
 std::vector<Pole> pola;
@@ -183,17 +184,15 @@ bool Pole::czyMoznaDodacLwice()
 
 void utworzPola()
 {
-	FILE* DanePol=fopen(SCIEZKA_DO_DANYCH_POL,"r");
+	FILE* danePol=fopen(SCIEZKA_DO_DANYCH_POL,"r");
 	
 	//sprawdź czy istnieje plik
-	if(DanePol==NULL)
+	if(danePol==NULL)
 	{
 		fprintf(stderr,"Błąd otwarcie pliku bazy danych nieruchomości.\n");
 		fprintf(stderr,"Sprawdź, czy plik %s istnieje.\n",SCIEZKA_DO_DANYCH_POL);
 		exit(1);
 	}
-	
-	//pola.reserve(40);
 	
 	char tmp[128];
 	std::string tmpString;
@@ -207,16 +206,16 @@ void utworzPola()
 	//Wczytaj dane w formacie: TypPola, Nazwa pola, Wartość, Cena wywoławcza, czynsze[0-6]
 	while(licznikPol<41)
 	{
-		if(feof(DanePol))
+		if(feof(danePol))
 		{
 			fprintf(stderr,"Niekompletna tablica danych o nieruchomościach.\n");
 			fprintf(stderr,"Sprawdź, czy plik %s jest kompletny.\n",SCIEZKA_DO_DANYCH_POL);
 			
-			fclose(DanePol);
+			fclose(danePol);
 			exit(2);
 		}
 		
-		fgets(tmp,128,DanePol);
+		fgets(tmp,128,danePol);
 		if(tmp[0]=='#')	//jeśli linijka stanowi komentarz
 			continue;
 			
@@ -241,24 +240,12 @@ void utworzPola()
 		}
 		
 		pola.push_back(Pole(tmpTyp, tmpNazwa, tmpWartosc, tmpCenaWywolawcza, tmpCzynsze,tmpTerytorium));
-		std::cout<<pola.back()<<std::endl;
 	}
 	
 	
-	fclose(DanePol);
+	fclose(danePol);
 }
 
-std::string wytnij(char* zrodlo)
-{
-	std::string tmpString(zrodlo);
-	size_t przesuniecie=tmpString.find(",");
-	
-	std::string outString(tmpString,0,przesuniecie);
-	tmpString=tmpString.substr(przesuniecie+1);
-	
-	strcpy(zrodlo, tmpString.c_str());
-	return outString;
-}
 
 bool sprawdz_kompletnosc_terytorium(const Pole* const  pole)
 {
