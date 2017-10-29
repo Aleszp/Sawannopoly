@@ -14,7 +14,7 @@
 
 #define SCIEZKA_DO_DANYCH_POL "/home/aleszp/Documents/programowanie/C++/Sawannopoly/pola.csv"
 
-static const uint8_t KOSZT_USTAWIENIA_LWICY=15;
+const uint8_t KOSZT_USTAWIENIA_LWICY=15;
 
 //Deklaracja istnienia klasy Gracz
 
