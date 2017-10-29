@@ -34,18 +34,20 @@ Karta::~Karta()
 	
 }
 
-void losujKarte(TypKarty talia, Gracz* gracz)
+void pobierzKarte(TypKarty talia, Gracz* gracz)
 {
 	
 	Karta karta;
-	//losuj
+	//pobierz kartę
 	
 	uzyjKarty(karta, gracz);
+	
+	//umieść kartę na sam koniec listy
 }
 
 void uzyjKarty(Karta karta, Gracz* gracz)
 {
-	
+	//tu umieść interpreter
 }
 
 void Karta::opisz()
@@ -104,4 +106,9 @@ void wczytajKarty()
 	}
 	
 	fclose(daneKart);
+}
+
+void przetasujKarty()
+{
+	//potasuj karty, np. tworząc tymczasową listę, przenosząc dane do niej i kopiując do początkowej listy w losowej kolejności
 }

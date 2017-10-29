@@ -29,10 +29,11 @@ class Karta
 		void opisz();
 };
 
-void losujKarte(TypKarty talia, Gracz* gracz);
+void pobierzKarte(TypKarty talia, Gracz* gracz);
 void uzyjKarty(Karta karta, Gracz* gracz);
 
 void wczytajKarty();
+void przetasujKarty();
 
 extern std::list<Karta>karty[2];
 

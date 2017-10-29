@@ -37,6 +37,9 @@
 #plik wykonywalny
 Sawannopoly
 
-#pliki wyjściowe programu
+#pliki wejściowe i wyjściowe
 *.csv
 *.log
+
+#notatki
+*.txt

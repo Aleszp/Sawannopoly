@@ -104,14 +104,14 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			case LATWA_ZDOBYCZ:
 			{
-				losujKarte(KARTY_LATWEJ_ZDOBYCZY, gracz);
+				pobierzKarte(KARTY_LATWEJ_ZDOBYCZY, gracz);
 				//wywołać obsługę Łatwej zdobyczy
 			}
 			break;
 			case DLA_DOBRA_STADA:
 			{
 				//wywołać obsługę Dla dobra stada
-				losujKarte(KARTY_DLA_DOBRA_STADA, gracz);
+				pobierzKarte(KARTY_DLA_DOBRA_STADA, gracz);
 			}
 			break;
 			case POSILEK:
