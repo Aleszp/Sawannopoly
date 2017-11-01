@@ -44,6 +44,8 @@ class Pole
 		void zwolnijLwice();
 		void dodajLwice();
 		void odejmijLwice();
+		void wykup();
+		void zastaw();
 		
 		bool czyMoznaDodacLwice();
 		
@@ -52,6 +54,7 @@ class Pole
 		inline uint8_t podajTerytorium()const{return terytorium_;}
 		inline std::string podajNazwe()const{return nazwa_;}
 		inline Gracz* podajWlasciciela()const{return wlasciciel_;}
+		inline bool podajZastawione()const{return zastawione_;}
 		
 		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel; wlasciciel_->dajPole(id_);}
 		inline void ustawLwice(uint8_t lwice){lwice_=lwice;}

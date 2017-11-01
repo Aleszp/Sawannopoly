@@ -150,6 +150,25 @@ void Pole::akcja(Gracz* gracz)
 	}
 }
 
+void Pole::wykup()
+{
+	if(wlasciciel_->podajGotowke()>=(wartosc_*11)/10)
+		{
+			wlasciciel_->zaplac((wartosc_*11)/10,&bank);
+		}
+}
+
+void Pole::zastaw()
+{
+	while(lwice_>0)
+	{
+		odejmijLwice();
+	}
+	if(podajZastawione())
+		return; 
+	wlasciciel_->dodajGotowke(wartosc_/2);
+	zastawione_=true;
+}
 void Pole::dodajLwice()
 {
 	if(czyMoznaDodacLwice())
@@ -166,9 +185,12 @@ void Pole::dodajLwice()
 
 void Pole::odejmijLwice()
 {
-	lwice_--;
-	wlasciciel_->dodajLwice(+1);
-	wlasciciel_->dodajGotowke((KOSZT_USTAWIENIA_LWICY*4)/5);
+	if(lwice_>0)
+	{
+		lwice_--;
+		wlasciciel_->dodajLwice(+1);
+		wlasciciel_->dodajGotowke((KOSZT_USTAWIENIA_LWICY*4)/5);
+	}
 }
 		
 bool Pole::czyMoznaDodacLwice()
@@ -178,7 +200,6 @@ bool Pole::czyMoznaDodacLwice()
 	else	
 		return false;
 }
-
 
 /*********************************************************************/
 
