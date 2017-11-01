@@ -31,7 +31,7 @@ void Gracz::rusz_o_n_krokow(int8_t n)
 		gotowka_+=20;
 		polozenie_-=40;
 	}
-	std::cerr<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<(pola[polozenie_].podajNazwe())<<") z terytorium "<<(uint16_t)pola[polozenie_].podajTerytorium()<<" mając "<<gotowka_<<" żuczków."<<std::endl;
+	std::cerr<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<(pola[polozenie_].podajNazwe())<<") z terytorium "<<(uint16_t)pola[polozenie_].podajTerytorium()<<" mając "<<gotowka_<<" żuczków i "<<(uint16_t)podajLiczbeWolnychLwic()<<" wolną(e/ych) lwic."<<std::endl;
 	pola[polozenie_].akcja(this);
 }
 
@@ -118,6 +118,11 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 }
 
 void Gracz::bankrutuj_na_rzecz(Gracz* komu)
+{
+	
+}
+
+void Gracz::zabierzLwice(uint8_t ile)
 {
 	
 }

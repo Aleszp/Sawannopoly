@@ -36,6 +36,7 @@ class Gracz
 		void rzutKoscia();
 		void zaplac(uint16_t kwota, Gracz* komu);
 		void bankrutuj_na_rzecz(Gracz* komu);
+		void zabierzLwice(uint8_t ile);
 		
 		bool wymus_gotowke(uint16_t kwota);
 		bool czyMaPole(uint8_t id);
@@ -48,7 +49,7 @@ class Gracz
 		
 		inline void obnizWygnanie(){wygnany_--; if(wygnany_==0) ustawWygnanie(false);}
 		inline void dodajGotowke(int16_t kwota){gotowka_+=kwota;}
-		inline void dodajLwice(int8_t ile){wolne_lwice_+=ile;}
+		inline void dodajLwice(uint8_t ile){wolne_lwice_+=ile;}
 		inline void ustawKartePowrotu(bool stan){karta_powrotu_z_wygnania_=stan;}
 };
 

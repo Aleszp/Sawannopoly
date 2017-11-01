@@ -37,7 +37,7 @@ void pobierzKarte(TypKarty talia, Gracz* gracz);
 void uzyjKarty(Karta karta, Gracz* gracz);
 
 void wczytajKarty();
-void przetasujKarty();
+void przetasujKarty(TypKarty talia);
 
 extern std::list<Karta>karty[2];
 
