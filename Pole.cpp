@@ -18,7 +18,7 @@ Pole::Pole()
 	typ_=STANDARDOWE;
 	nazwa_="???";
 	wartosc_=0;
-	cena_wywolawcza_=0;
+	cenaWywolawcza_=0;
 	terytorium_=0;
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=(uint8_t)0;
@@ -35,7 +35,7 @@ Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywol
 	typ_=typ;
 	nazwa_=nazwa;
 	wartosc_=wartosc;
-	cena_wywolawcza_=cena_wywolawcza;
+	cenaWywolawcza_=cena_wywolawcza;
 	terytorium_=terytorium;
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=czynsze[ii];

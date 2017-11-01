@@ -24,7 +24,7 @@ class Pole
 		TypPola typ_;
 		std::string nazwa_;
 		uint16_t wartosc_;
-		uint16_t cena_wywolawcza_;
+		uint16_t cenaWywolawcza_;
 		uint16_t czynsze_[6];	//wysokości opłat gdy gracz ma: 1 pole z dzielnicy, wszystkie pola z dzielnicy, jedną lwicę, dwie lwice, trzy lwice, cztery lwice
 		uint8_t lwice;
 		uint8_t id_;
@@ -52,6 +52,9 @@ class Pole
 		inline uint8_t podajId()const{return id_;}
 		inline uint8_t podajLiczbeLwic()const{return lwice_;}
 		inline uint8_t podajTerytorium()const{return terytorium_;}
+		inline uint16_t podajWartosc()const{return wartosc_;}
+		inline uint16_t podajCeneWywolawcza()const{return cenaWywolawcza_;}
+		inline uint16_t podajCzynsz(uint8_t ktory=0)const{return czynsze_[ktory];}
 		inline std::string podajNazwe()const{return nazwa_;}
 		inline Gracz* podajWlasciciela()const{return wlasciciel_;}
 		inline bool podajZastawione()const{return zastawione_;}

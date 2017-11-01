@@ -77,7 +77,7 @@ void uzyjKarty(Karta karta, Gracz* gracz)
 			
 			break;
 			case PRZESUN:
-				gracz->rusz_o_n_krokow(karta.podajLiczbe(ii)-gracz->gdzieJest());
+				gracz->rusz_o_n_krokow(karta.podajLiczbe(ii)-gracz->podajPolozenie());
 			break;
 			case WYGNAJ:
 				gracz->ustawWygnanie(true);

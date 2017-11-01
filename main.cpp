@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.16					 *
+ * Wersja: DEV2.17					 *
  *************************************/
 
 //Standardowe nagłówki C/C++

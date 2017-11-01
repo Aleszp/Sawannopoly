@@ -14,8 +14,8 @@ Gracz::Gracz(std::string imie="???", uint64_t gotowka=0)
 	polozenie_=0;
 	wygnany_=false;
 	licznikDubletu_=0;
-	wolne_lwice_=0;
-	karta_powrotu_z_wygnania_=false;
+	wolneLwice_=0;
+	kartaPowrotuZWygnania_=false;
 }
 
 Gracz::~Gracz()
