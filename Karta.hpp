@@ -27,6 +27,10 @@ class Karta
 		~Karta();
 		
 		void opisz();
+		
+		inline std::string podajOpis()const{return opis_;}
+		inline EfektKarty podajEfekt(uint8_t ii)const{return efekty_[ii];}
+		inline int16_t podajLiczbe(uint8_t ii)const{return liczby_[ii];}
 };
 
 void pobierzKarte(TypKarty talia, Gracz* gracz);

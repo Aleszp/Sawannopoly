@@ -5,6 +5,8 @@
 
 //Nagłówki z katalogu programu
 #include "Karta.hpp"
+#include "Gracz.hpp"
+#include "Bank.hpp"
 #include "inne.hpp"
 
 std::list<Karta>karty[2];
@@ -37,17 +39,52 @@ Karta::~Karta()
 void pobierzKarte(TypKarty talia, Gracz* gracz)
 {
 	
-	Karta karta;
-	//pobierz kartę
+	Karta karta=karty[talia].front();	//pobierz kartę z początku
+	karty[talia].pop_front();
+	
+	std::cout<<"Pobrana karta: "<<karta.podajOpis()<<std::endl;
 	
 	uzyjKarty(karta, gracz);
 	
-	//umieść kartę na sam koniec listy
+	std::cout<<"Odkładam na koniec kartę: "<<karta.podajOpis()<<std::endl;
+	
+	karty[talia].push_back(karta);	//umieść kartę na sam koniec listy
 }
 
 void uzyjKarty(Karta karta, Gracz* gracz)
 {
-	//tu umieść interpreter
+	//tu umieść interpreter (z trzema iteracjami)
+	
+	for(uint8_t ii=0;ii<3;ii++)
+	{
+		switch(karta.podajEfekt(ii))
+		{
+			case BRAK_EFEKTU:
+				//Nie rób nic
+			break;
+			case ZMIANA_GOTOWKI:
+				if(karta.podajLiczbe(ii)>0)
+					gracz->dodajGotowke(karta.podajLiczbe(ii));
+				else
+					gracz->zaplac((-1)*karta.podajLiczbe(ii),&bank);	//zmiana liczby z ujemnej na dodatnią, bo metoda zaplac pracuje na liczbach dodatnich (liczba ujemna traktowana jest jak bardzo duża liczba dodatnia ze względu na sposób reprezentacji liczb całkowitych
+			break;
+			case ZMIANA_LICZBY_LWIC:
+				
+			break;
+			case PRZESUN:
+				gracz->rusz_o_n_krokow(karta.podajLiczbe(ii)-gracz->gdzieJest());
+			break;
+			case WYGNAJ:
+				gracz->ustawWygnanie(true);
+			break;
+			case KARTA_POWROTU_Z_WYGNANIA:
+				gracz->ustawKartePowrotu(true);
+			break;			
+			default:
+				std::cerr<<"Nieprawidłowy efekt karty."<<std::endl;
+			break;
+		}
+	}
 }
 
 void Karta::opisz()

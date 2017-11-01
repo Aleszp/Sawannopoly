@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.13					 *
+ * Wersja: DEV2.14					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	}
 	
 	QApplication Aplikacja(argc, argv);
-	GlowneOkno Okno;
+	//GlowneOkno Okno;
     
     Gracz test("Test", 150);
     Gracz test2("Królowa", 150);
@@ -49,8 +49,9 @@ int main(int argc, char *argv[])
     pola[3].ustawLwice(1);
     pola[3].ustawWlasciciela(&test2);
     pola[13].ustawWlasciciela(&test2);
-    for(uint8_t ii=0;ii<1;ii++)
+    for(uint8_t ii=0;ii<100;ii++)
     {
+		std::cout<<(uint16_t)ii<<": ";
 		if(test.podajWygnanie())
 		{
 			test.obnizWygnanie();

@@ -49,6 +49,7 @@ class Gracz
 		inline void obnizWygnanie(){wygnany_--; if(wygnany_==0) ustawWygnanie(false);}
 		inline void dodajGotowke(int16_t kwota){gotowka_+=kwota;}
 		inline void dodajLwice(int8_t ile){wolne_lwice_+=ile;}
+		inline void ustawKartePowrotu(bool stan){karta_powrotu_z_wygnania_=stan;}
 };
 
 #endif

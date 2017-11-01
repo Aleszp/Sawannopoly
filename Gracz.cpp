@@ -4,6 +4,7 @@
 
 //Nagłówki z katalogu programu
 #include "Gracz.hpp"
+#include "Bank.hpp"
 #include "Pole.hpp"
 
 Gracz::Gracz(std::string imie="???", uint64_t gotowka=0)
@@ -98,14 +99,16 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 	if(gotowka_>=kwota)
 	{
 		gotowka_-=kwota;
-		komu->dodajGotowke(kwota);
+		if(komu!=&bank)
+			komu->dodajGotowke(kwota);
 	}
 	else
 	{
 		if(wymus_gotowke(kwota))
 		{	
 			gotowka_-=kwota;
-			komu->dodajGotowke(kwota);
+			if(komu!=&bank)
+				komu->dodajGotowke(kwota);
 		}
 		else
 		{
