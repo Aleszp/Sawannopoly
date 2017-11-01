@@ -152,9 +152,9 @@ void Pole::akcja(Gracz* gracz)
 
 void Pole::wykup()
 {
-	if(wlasciciel_->podajGotowke()>=(wartosc_*11)/10)
+	if(wlasciciel_->podajGotowke()>=(wartosc_*3)/5)
 		{
-			wlasciciel_->zaplac((wartosc_*11)/10,&bank);
+			wlasciciel_->zaplac((wartosc_*3)/5,&bank);
 		}
 }
 
