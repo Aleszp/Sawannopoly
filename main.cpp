@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.20					 *
+ * Wersja: DEV2.21					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	srand (time (NULL));
 	QApplication Aplikacja(argc, argv);
 	
-	std::string sciezka=Aplikacja.applicationDirPath().toStdString();	//Pozyskaj ścieżkę do katalogu
+	std::string sciezka=Aplikacja.applicationDirPath().toStdString();	//Pozyskaj ścieżkę do katalogu pliku wykonywalnego
 	
 	GlowneOkno Okno;
 	
