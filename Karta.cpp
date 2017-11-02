@@ -123,7 +123,7 @@ void wczytajKarty(std::string sciezka)
 	{
 		fprintf(stderr,"Błąd otwarcie pliku bazy danych kart.\n");
 		fprintf(stderr,"Sprawdź, czy plik %s istnieje.\n",SCIEZKA_DO_DANYCH_KART);
-		exit(3);
+		exit(BRAK_DANYCH_KART);
 	}
 	
 	char tmp[1024];

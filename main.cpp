@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.23					 *
+ * Wersja: DEV2.24					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -69,6 +69,6 @@ int main(int argc, char *argv[])
 	
 	std::cerr<<"Koniec"<<std::endl;
     
-    return 0; //Aplikacja.exec();
+    return OK; //Aplikacja.exec();
 }
 

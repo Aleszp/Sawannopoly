@@ -212,7 +212,7 @@ void utworzPola(std::string sciezka)
 	{
 		fprintf(stderr,"Błąd otwarcie pliku bazy danych nieruchomości.\n");
 		fprintf(stderr,"Sprawdź, czy plik %s istnieje.\n",SCIEZKA_DO_DANYCH_POL);
-		exit(1);
+		exit(BRAK_DANYCH_POL);
 	}
 	
 	char tmp[128];
@@ -233,7 +233,7 @@ void utworzPola(std::string sciezka)
 			fprintf(stderr,"Sprawdź, czy plik %s jest kompletny.\n",SCIEZKA_DO_DANYCH_POL);
 			
 			fclose(danePol);
-			exit(2);
+			exit(NIEKOMPLETNE_DANE_POL);
 		}
 		
 		fgets(tmp,128,danePol);
