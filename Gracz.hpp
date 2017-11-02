@@ -18,7 +18,6 @@ class Gracz
 		std::string imie_;
 		uint64_t gotowka_;
 		uint8_t polozenie_;
-		std::list<uint8_t> nieruchomosci_;
 		uint8_t wygnany_;
 		uint8_t licznikDubletu_;
 		uint8_t wolneLwice_;
@@ -30,7 +29,7 @@ class Gracz
 		
 		void ruszNKrokow(int8_t n);
 		void idzDoPola(uint8_t cel);
-		void zabierzPole(uint8_t id);
+		void zabierzPole(uint8_t id, Gracz* nowyWlasciciel);
 		void dajPole(uint8_t id);
 		void ustawWygnanie(bool wygnany);
 		void rzutKoscia();
@@ -38,6 +37,7 @@ class Gracz
 		void bankrutuj_na_rzecz(Gracz* komu);
 		void zabierzLwice(uint8_t ile);
 		
+		uint8_t policzWszystkieLwice();
 		bool wymusGotowke(uint16_t kwota);
 		bool wymusLwice(uint8_t ile);
 		bool czyMaPole(uint8_t id);

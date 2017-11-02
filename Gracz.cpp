@@ -41,15 +41,14 @@ void Gracz::idzDoPola(uint8_t cel)
 	pola[polozenie_].akcja(this);
 }
 
-void Gracz::zabierzPole(uint8_t id)
+void Gracz::zabierzPole(uint8_t id, Gracz* nowyWlasciciel=&bank)
 {
-	nieruchomosci_.remove(id);
+	pola[id].ustawWlasciciela(nowyWlasciciel);
 }
 
 void Gracz::dajPole(uint8_t id)
 {
-	nieruchomosci_.remove(id);
-	nieruchomosci_.push_back(id);
+	pola[id].ustawWlasciciela(this);
 }
 
 void Gracz::ustawWygnanie(bool wygnany)
@@ -138,14 +137,18 @@ void Gracz::zabierzLwice(uint8_t ile)
 	}
 }
 
-bool Gracz::wymusLwice(uint8_t ile)
+uint8_t Gracz::policzWszystkieLwice()
 {
-	while(wolneLwice_<=ile)
+	uint8_t liczbaLwic=wolneLwice_;
+	
+	for (std::vector<Pole>::const_iterator it = pola.begin();it != pola.end(); ++it)
 	{
-		//zezwól wyłącznie na akcje zdejmowania lwic z pól i pozyskiwania lwic
-	}
-	return false;
+		if(it->podajWlasciciela()==this)
+			liczbaLwic+=it->podajLiczbeLwic();
+	}	
+	return liczbaLwic;
 }
+
 
 bool Gracz::wymusGotowke(uint16_t kwota)
 {
@@ -156,10 +159,18 @@ bool Gracz::wymusGotowke(uint16_t kwota)
 	return false;
 }
 
+bool Gracz::wymusLwice(uint8_t ile)
+{
+	while(wolneLwice_<=ile)
+	{
+		//zezwól wyłącznie na akcje zdejmowania lwic z pól
+	}
+	return false;
+}
+
 bool Gracz::czyMaPole(uint8_t id) 
 {
-	std::list<uint8_t>::iterator it = find (nieruchomosci_.begin(), nieruchomosci_.end(), id);
-	if (it != nieruchomosci_.end())
+	if(pola[id].podajWlasciciela()==this)
 		return true;
 	else
 		return false;

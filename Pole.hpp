@@ -59,7 +59,7 @@ class Pole
 		inline Gracz* podajWlasciciela()const{return wlasciciel_;}
 		inline bool podajZastawione()const{return zastawione_;}
 		
-		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel; wlasciciel_->dajPole(id_);}
+		inline void ustawWlasciciela(Gracz* wlasciciel){wlasciciel_=wlasciciel;}
 		inline void ustawLwice(uint8_t lwice){lwice_=lwice;}
 		friend std::ostream& operator<<(std::ostream&, Pole&);
 };

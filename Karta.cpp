@@ -84,7 +84,10 @@ void uzyjKarty(Karta karta, Gracz* gracz)
 			break;
 			case KARTA_POWROTU_Z_WYGNANIA:
 				gracz->ustawKartePowrotu(true);
-			break;			
+			break;		
+			case GLOD:
+				gracz->zaplac((uint16_t)(gracz->policzWszystkieLwice()*karta.podajLiczbe(ii)),&bank);
+			break;	
 			default:
 				std::cerr<<"Nieprawidłowy efekt karty."<<std::endl;
 			break;
