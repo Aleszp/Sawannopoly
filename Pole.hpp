@@ -12,7 +12,7 @@
 #include "TypyWyliczeniowe.hpp"
 #include "Gracz.hpp"
 
-#define SCIEZKA_DO_DANYCH_POL "/home/aleszp/Documents/programowanie/C++/Sawannopoly/pola.csv"
+#define SCIEZKA_DO_DANYCH_POL ((sciezka+"/data/pola.csv").c_str())
 
 const uint8_t KOSZT_USTAWIENIA_LWICY=15;
 
@@ -68,7 +68,7 @@ class Pole
 extern uint8_t licznikPol;
 extern std::vector<Pole> pola;
 
-void utworzPola();
+void utworzPola(std::string sciezka);
 bool sprawdz_kompletnosc_terytorium(const Pole* const pole);
 
 #endif

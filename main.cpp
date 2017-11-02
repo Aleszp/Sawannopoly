@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: DEV2.17					 *
+ * Wersja: DEV2.18					 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -13,6 +13,8 @@
 //Nagłówki z katalogu QtWidgets
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>
+#include <QtCore/QCoreApplication>
+#include <QtCore/QString>
 
 //Nagłówki z katalogu programu
 #include "GlowneOkno.hpp"
@@ -26,9 +28,14 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	srand (time (NULL));
+	QApplication Aplikacja(argc, argv);
 	
-	utworzPola();
-	wczytajKarty();
+	std::string sciezka=Aplikacja.applicationDirPath().toStdString();	//Pozyskaj ścieżkę do katalogu
+	
+	GlowneOkno Okno;
+	
+	utworzPola(sciezka);
+	wczytajKarty(sciezka);
 	
 	for(uint8_t ii=0;ii<2;ii++)
 	{
@@ -36,8 +43,7 @@ int main(int argc, char *argv[])
 			it->opisz();
 	}
 	
-	QApplication Aplikacja(argc, argv);
-	//GlowneOkno Okno;
+	
     
     Gracz test("Test", 150);
     Gracz test2("Królowa", 150);

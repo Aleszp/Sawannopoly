@@ -102,7 +102,7 @@ void Karta::opisz()
 	
 }
 
-void wczytajKarty()
+void wczytajKarty(std::string sciezka)
 {
 	FILE* daneKart=fopen(SCIEZKA_DO_DANYCH_KART,"r");
 	

@@ -9,7 +9,7 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 
-#define SCIEZKA_DO_DANYCH_KART "/home/aleszp/Documents/programowanie/C++/Sawannopoly/karty.csv"
+#define SCIEZKA_DO_DANYCH_KART ((sciezka+"/data/karty.csv").c_str())
 
 class Gracz;
 class Pole;
@@ -36,7 +36,7 @@ class Karta
 void pobierzKarte(TypKarty talia, Gracz* gracz);
 void uzyjKarty(Karta karta, Gracz* gracz);
 
-void wczytajKarty();
+void wczytajKarty(std::string sciezka);
 void przetasujKarty(TypKarty talia);
 
 extern std::list<Karta>karty[2];

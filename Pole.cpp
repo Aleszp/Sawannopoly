@@ -203,7 +203,7 @@ bool Pole::czyMoznaDodacLwice()
 
 /*********************************************************************/
 
-void utworzPola()
+void utworzPola(std::string sciezka)
 {
 	FILE* danePol=fopen(SCIEZKA_DO_DANYCH_POL,"r");
 	
