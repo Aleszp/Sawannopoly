@@ -2,4 +2,6 @@
 0,1,5,0,0,0,0,Po gałęzi o którą się oparłeś chodziło trochę owadów. Udało Ci się zebrać 5 żuczków.
 0,3,19,2,1,0,0,Miłość rośnie wokół nas? Przenieś się do Miłosnego Zakątka, gdzie czekać na Ciebie będzie nowa lwica.
 1,1,-10,0,0,0,0,Ze względu na hieny pustoszące Twoje ziemie płacisz 10 żuczków oddziałowi gepardów, który pomaga Ci namierzyć i przepędzić kłusoników.
-1,6,2,0,0,0,0,Twoje stado głoduje. Zapłać po 2 żuczki za każdą lwicę (obstawiającą pole bądź wolną).
+1,6,2,0,0,0,0,Twoje stado głoduje. Zapłać po 2 żuczki za każdą lwicę (obsadzającej pole bądź wolną).
+1,7,2,0,0,0,0,Hieny! Ci kłusownicy plądrują Twoje ziemie wywołując straty w wysokości 2 żuczków za każde pole w Twoim posiadaniu.
+0,7,-2,6,-1,0,0,Wielkie polowanie! Zyskujesz 2 żuczki za każde posiadane pole oraz po jednym żuczku za każdą lwicę w Twoim stadzie (obsadzającej pole bądź wolną).

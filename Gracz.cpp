@@ -149,6 +149,17 @@ uint8_t Gracz::policzWszystkieLwice()
 	return liczbaLwic;
 }
 
+uint8_t Gracz::policzWszystkieZiemie()
+{
+	uint8_t liczbaPol=0;
+	
+	for (std::vector<Pole>::const_iterator it = pola.begin();it != pola.end(); ++it)
+	{
+		if(it->podajWlasciciela()==this)
+			liczbaPol++;
+	}	
+	return liczbaPol;
+}
 
 bool Gracz::wymusGotowke(uint16_t kwota)
 {

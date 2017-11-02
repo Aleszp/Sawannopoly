@@ -86,7 +86,16 @@ void uzyjKarty(Karta karta, Gracz* gracz)
 				gracz->ustawKartePowrotu(true);
 			break;		
 			case GLOD:
-				gracz->zaplac((uint16_t)(gracz->policzWszystkieLwice()*karta.podajLiczbe(ii)),&bank);
+				if(karta.podajLiczbe(ii)>0)
+					gracz->zaplac((uint16_t)(gracz->policzWszystkieLwice()*karta.podajLiczbe(ii)),&bank);
+				else
+					gracz->dodajGotowke((uint16_t)(gracz->policzWszystkieLwice()*karta.podajLiczbe(ii)));
+			break;
+			case KOSZT_ZIEM:
+				if(karta.podajLiczbe(ii)>0)
+					gracz->zaplac((uint16_t)(gracz->policzWszystkieZiemie()*karta.podajLiczbe(ii)),&bank);
+				else
+					gracz->dodajGotowke((uint16_t)(gracz->policzWszystkieZiemie()*karta.podajLiczbe(ii)));
 			break;	
 			default:
 				std::cerr<<"Nieprawidłowy efekt karty."<<std::endl;

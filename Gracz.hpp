@@ -38,6 +38,7 @@ class Gracz
 		void zabierzLwice(uint8_t ile);
 		
 		uint8_t policzWszystkieLwice();
+		uint8_t policzWszystkieZiemie();
 		bool wymusGotowke(uint16_t kwota);
 		bool wymusLwice(uint8_t ile);
 		bool czyMaPole(uint8_t id);
