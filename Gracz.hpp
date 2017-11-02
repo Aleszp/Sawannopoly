@@ -28,8 +28,8 @@ class Gracz
 		explicit Gracz(std::string imie, uint64_t gotowka);
 		~Gracz();
 		
-		void rusz_o_n_krokow(int8_t n);
-		void idz_do_pola(uint8_t cel);
+		void ruszNKrokow(int8_t n);
+		void idzDoPola(uint8_t cel);
 		void zabierzPole(uint8_t id);
 		void dajPole(uint8_t id);
 		void ustawWygnanie(bool wygnany);
@@ -38,7 +38,8 @@ class Gracz
 		void bankrutuj_na_rzecz(Gracz* komu);
 		void zabierzLwice(uint8_t ile);
 		
-		bool wymus_gotowke(uint16_t kwota);
+		bool wymusGotowke(uint16_t kwota);
+		bool wymusLwice(uint8_t ile);
 		bool czyMaPole(uint8_t id);
 
 		inline uint8_t podajLiczbeWolnychLwic(){return wolneLwice_;}

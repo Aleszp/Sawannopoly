@@ -23,7 +23,7 @@ Gracz::~Gracz()
 	
 }
 
-void Gracz::rusz_o_n_krokow(int8_t n)
+void Gracz::ruszNKrokow(int8_t n)
 {
 	polozenie_+=n;
 	if(polozenie_>39)
@@ -35,7 +35,7 @@ void Gracz::rusz_o_n_krokow(int8_t n)
 	pola[polozenie_].akcja(this);
 }
 
-void Gracz::idz_do_pola(uint8_t cel)
+void Gracz::idzDoPola(uint8_t cel)
 {
 	polozenie_=cel;
 	pola[polozenie_].akcja(this);
@@ -56,13 +56,13 @@ void Gracz::ustawWygnanie(bool wygnany)
 {
 	if(wygnany) 
 	{
-		idz_do_pola(40);
+		idzDoPola(40);
 		wygnany_=3; 
 	}
 	else 
 	{
 		wygnany_=0;
-		idz_do_pola(10);
+		idzDoPola(10);
 	}
 }
 
@@ -91,7 +91,7 @@ void Gracz::rzutKoscia()
 		licznikDubletu_=0;
 	}
 	std::cout<<std::endl;
-	rusz_o_n_krokow(wynik[0]+wynik[1]);
+	ruszNKrokow(wynik[0]+wynik[1]);
 }
 
 void Gracz::zaplac(uint16_t kwota, Gracz* komu)
@@ -104,7 +104,7 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 	}
 	else
 	{
-		if(wymus_gotowke(kwota))
+		if(wymusGotowke(kwota))
 		{	
 			gotowka_-=kwota;
 			if(komu!=&bank)
@@ -124,14 +124,34 @@ void Gracz::bankrutuj_na_rzecz(Gracz* komu)
 
 void Gracz::zabierzLwice(uint8_t ile)
 {
-	
+	while(true)
+	{
+		if(wolneLwice_>=ile)
+		{	
+			wolneLwice_-=ile;
+			return;
+		}
+		else
+		{
+			wymusLwice(ile);
+		}
+	}
 }
 
-bool Gracz::wymus_gotowke(uint16_t kwota)
+bool Gracz::wymusLwice(uint8_t ile)
+{
+	while(lwice_<=ile)
+	{
+		//zezwól wyłącznie na akcje zdejmowania lwic z pól i pozyskiwania lwic
+	}
+	return false;
+}
+
+bool Gracz::wymusGotowke(uint16_t kwota)
 {
 	while(gotowka_<=kwota)
 	{
-		
+		//zezwól wyłącznie na akcje zdejmowania lwic z pól, odprawiania lwic, zastawiania terytorium lub sprzedarzy terytorium innym graczom
 	}
 	return false;
 }
