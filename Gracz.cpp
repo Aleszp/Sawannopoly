@@ -140,7 +140,7 @@ void Gracz::zabierzLwice(uint8_t ile)
 
 bool Gracz::wymusLwice(uint8_t ile)
 {
-	while(lwice_<=ile)
+	while(wolneLwice_<=ile)
 	{
 		//zezwól wyłącznie na akcje zdejmowania lwic z pól i pozyskiwania lwic
 	}
