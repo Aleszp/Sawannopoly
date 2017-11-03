@@ -25,4 +25,3 @@ void GlowneOkno::setupOkno(void)
 	okno_->setWindowTitle("Sawannopoly");
 }
 
-#include "GlowneOkno.moc"

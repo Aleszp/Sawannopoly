@@ -33,6 +33,10 @@
 
 #pliki moc wykorzystywane przy kompilacji QT
 *.moc
+*.debug
+*.user
+*.stash
+moc/
 
 #plik wykonywalny
 Sawannopoly
