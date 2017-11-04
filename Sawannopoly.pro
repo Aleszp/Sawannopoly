@@ -8,20 +8,23 @@ TARGET = Sawannopoly
 OBJECTS_DIR = obj
 MOC_DIR = moc
 INCLUDEPATH += .
-INCLUDEPATH += src
 
-# Input
-HEADERS += src\Bank.hpp \
-           src\GlowneOkno.hpp \
-           src\Gracz.hpp \
-           src\inne.hpp \
-           src\Karta.hpp \
-           src\Pole.hpp \
-           src\TypyWyliczeniowe.hpp
-SOURCES += src\Bank.cpp \
-           src\GlowneOkno.cpp \
-           src\Gracz.cpp \
-           src\inne.cpp \
-           src\Karta.cpp \
-           src\main.cpp \
-           src\Pole.cpp
+HEADERS += \
+    src/Bank.hpp \
+    src/GlowneOkno.hpp \
+    src/Gracz.hpp \
+    src/inne.hpp \
+    src/Karta.hpp \
+    src/Pole.hpp \
+    src/TypyWyliczeniowe.hpp
+
+SOURCES += \
+    src/Bank.cpp \
+    src/GlowneOkno.cpp \
+    src/Gracz.cpp \
+    src/inne.cpp \
+    src/Karta.cpp \
+    src/main.cpp \
+    src/Pole.cpp
+
+
