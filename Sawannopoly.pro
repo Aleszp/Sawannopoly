@@ -16,7 +16,8 @@ HEADERS += \
     src/inne.hpp \
     src/Karta.hpp \
     src/Pole.hpp \
-    src/TypyWyliczeniowe.hpp
+    src/TypyWyliczeniowe.hpp \
+    src/WyborTrybu.hpp
 
 SOURCES += \
     src/Bank.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     src/inne.cpp \
     src/Karta.cpp \
     src/main.cpp \
-    src/Pole.cpp
+    src/Pole.cpp \
+    src/WyborTrybu.cpp
 
 

@@ -24,11 +24,12 @@ class GlowneOkno : public QMainWindow
     private:
 		Ui::GlowneOkno *ui;
 		QWidget* okno_;
+        TrybyGry tryb_;
 		
 		void setupOkno(void);
 
 	public:
-		explicit GlowneOkno(QWidget* parent = nullptr);
+        explicit GlowneOkno(QWidget* parent = nullptr);
 		~GlowneOkno();
 		
 		

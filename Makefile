@@ -54,7 +54,9 @@ SOURCES       = src/Bank.cpp \
 		src/inne.cpp \
 		src/Karta.cpp \
 		src/main.cpp \
-		src/Pole.cpp moc/moc_GlowneOkno.cpp
+		src/Pole.cpp \
+		src/WyborTrybu.cpp moc/moc_GlowneOkno.cpp \
+		moc/moc_WyborTrybu.cpp
 OBJECTS       = obj/Bank.o \
 		obj/GlowneOkno.o \
 		obj/Gracz.o \
@@ -62,7 +64,9 @@ OBJECTS       = obj/Bank.o \
 		obj/Karta.o \
 		obj/main.o \
 		obj/Pole.o \
-		obj/moc_GlowneOkno.o
+		obj/WyborTrybu.o \
+		obj/moc_GlowneOkno.o \
+		obj/moc_WyborTrybu.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -130,13 +134,15 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/inne.hpp \
 		src/Karta.hpp \
 		src/Pole.hpp \
-		src/TypyWyliczeniowe.hpp src/Bank.cpp \
+		src/TypyWyliczeniowe.hpp \
+		src/WyborTrybu.hpp src/Bank.cpp \
 		src/GlowneOkno.cpp \
 		src/Gracz.cpp \
 		src/inne.cpp \
 		src/Karta.cpp \
 		src/main.cpp \
-		src/Pole.cpp
+		src/Pole.cpp \
+		src/WyborTrybu.cpp
 QMAKE_TARGET  = Sawannopoly
 DESTDIR       = 
 TARGET        = Sawannopoly
@@ -293,8 +299,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents src/Bank.hpp src/GlowneOkno.hpp src/Gracz.hpp src/inne.hpp src/Karta.hpp src/Pole.hpp src/TypyWyliczeniowe.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/Bank.cpp src/GlowneOkno.cpp src/Gracz.cpp src/inne.cpp src/Karta.cpp src/main.cpp src/Pole.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/Bank.hpp src/GlowneOkno.hpp src/Gracz.hpp src/inne.hpp src/Karta.hpp src/Pole.hpp src/TypyWyliczeniowe.hpp src/WyborTrybu.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/Bank.cpp src/GlowneOkno.cpp src/Gracz.cpp src/inne.cpp src/Karta.cpp src/main.cpp src/Pole.cpp src/WyborTrybu.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -320,13 +326,18 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc/moc_GlowneOkno.cpp
+compiler_moc_header_make_all: moc/moc_GlowneOkno.cpp moc/moc_WyborTrybu.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc/moc_GlowneOkno.cpp
+	-$(DEL_FILE) moc/moc_GlowneOkno.cpp moc/moc_WyborTrybu.cpp
 moc/moc_GlowneOkno.cpp: src/TypyWyliczeniowe.hpp \
 		src/GlowneOkno.hpp \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include src/GlowneOkno.hpp -o moc/moc_GlowneOkno.cpp
+
+moc/moc_WyborTrybu.cpp: src/TypyWyliczeniowe.hpp \
+		src/WyborTrybu.hpp \
+		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include src/WyborTrybu.hpp -o moc/moc_WyborTrybu.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -382,8 +393,15 @@ obj/Pole.o: src/Pole.cpp src/Pole.hpp \
 		src/inne.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Pole.o src/Pole.cpp
 
+obj/WyborTrybu.o: src/WyborTrybu.cpp src/WyborTrybu.hpp \
+		src/TypyWyliczeniowe.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/WyborTrybu.o src/WyborTrybu.cpp
+
 obj/moc_GlowneOkno.o: moc/moc_GlowneOkno.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_GlowneOkno.o moc/moc_GlowneOkno.cpp
+
+obj/moc_WyborTrybu.o: moc/moc_WyborTrybu.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_WyborTrybu.o moc/moc_WyborTrybu.cpp
 
 ####### Install
 

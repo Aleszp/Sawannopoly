@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: Pre-alfa-1   			 *
+ * Wersja: Pre-alfa-2   			 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	
 	std::string sciezka=Aplikacja.applicationDirPath().toStdString();	//Pozyskaj ścieżkę do katalogu pliku wykonywalnego
 	
-	GlowneOkno Okno;
+    GlowneOkno Okno;
 	
 	utworzPola(sciezka);
 	wczytajKarty(sciezka);
@@ -69,6 +69,6 @@ int main(int argc, char *argv[])
 	
 	std::cerr<<"Koniec"<<std::endl;
     
-    return OK; //Aplikacja.exec();
+    return Aplikacja.exec();
 }
 
