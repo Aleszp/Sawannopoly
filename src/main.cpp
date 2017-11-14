@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: Pre-alfa-4   			 *
+ * Wersja: Pre-alfa-5   			 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -41,8 +41,6 @@ int main(int argc, char *argv[])
 		for (auto it = karty[ii].begin();it != karty[ii].end(); ++it)
 			it->opisz();
 	}
-	
-	
     
     Gracz test("Test", 150);
     Gracz test2("Królowa", 150);

@@ -17,16 +17,17 @@ WyborTrybu::WyborTrybu(QWidget* parent):QWidget(parent)
 WyborTrybu::~WyborTrybu()
 {
     delete gorace_krzeslo_;
+    delete tytul_;
     delete rozmieszczacz_;
 }
 
 void WyborTrybu::setupWybor(void)
 {
-    this->resize(1024,768);
-    this->setWindowTitle("Sawannopoly - menu główne");
-
     rozmieszczacz_=new QVBoxLayout(this);
     this->setLayout(rozmieszczacz_);
+
+    tytul_=new QLabel("MENU GŁÓWNE");
+    rozmieszczacz_->addWidget(tytul_);
 
     gorace_krzeslo_=new QPushButton("Tryb \"Gorące Krzesło\"");
     rozmieszczacz_->addWidget(gorace_krzeslo_);

@@ -9,6 +9,7 @@
 //Nagłówki z katalogu QtWidgets
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QBoxLayout>
+#include <QtWidgets/QLabel>
 
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
@@ -27,6 +28,7 @@ class WyborTrybu : public QWidget
         QVBoxLayout* rozmieszczacz_;
         QPushButton* gorace_krzeslo_;
         QEventLoop* loop_;
+        QLabel* tytul_;
         TrybyGry tryb_;
 		
         void setupWybor(void);

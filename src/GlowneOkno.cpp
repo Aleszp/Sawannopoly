@@ -12,9 +12,15 @@
 GlowneOkno::GlowneOkno(QWidget* parent):QMainWindow(parent)
 {
     WyborTrybu wybor;
+    setupOkno();
+    okno_->show();
+
+    glownyRozmieszczacz_=new QVBoxLayout();
+    okno_->setLayout(glownyRozmieszczacz_);
+    glownyRozmieszczacz_->addWidget(&wybor);
+
     tryb_=(TrybyGry)wybor.exec();
-	setupOkno();
-	okno_->show();
+
 }
 
 GlowneOkno::~GlowneOkno()

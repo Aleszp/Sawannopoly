@@ -8,6 +8,7 @@
 //Nagłówki z katalogu QtWidgets
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QBoxLayout>
 
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
@@ -25,7 +26,8 @@ class GlowneOkno : public QMainWindow
 		Ui::GlowneOkno *ui;
 		QWidget* okno_;
         TrybyGry tryb_;
-		
+        QVBoxLayout* glownyRozmieszczacz_;
+
 		void setupOkno(void);
 
 	public:
