@@ -7,29 +7,26 @@
 #include "WyborTrybu.hpp"
 #include "TypyWyliczeniowe.hpp"
 
-WyborTrybu::WyborTrybu(QWidget* parent):QDialog(parent)
+WyborTrybu::WyborTrybu(QWidget* parent):QWidget(parent)
 {
     tryb_=BRAK_TRYBU;
     setupWybor();
-	okno_->show();
+    this->show();
 }
 
 WyborTrybu::~WyborTrybu()
 {
-    delete loop_;
     delete gorace_krzeslo_;
     delete rozmieszczacz_;
-    delete okno_;
 }
 
 void WyborTrybu::setupWybor(void)
 {
-	okno_=new QWidget();
-	okno_->resize(1024,768);
-    okno_->setWindowTitle("Sawannopoly - menu główne");
+    this->resize(1024,768);
+    this->setWindowTitle("Sawannopoly - menu główne");
 
-    rozmieszczacz_=new QVBoxLayout(okno_);
-    okno_->setLayout(rozmieszczacz_);
+    rozmieszczacz_=new QVBoxLayout(this);
+    this->setLayout(rozmieszczacz_);
 
     gorace_krzeslo_=new QPushButton("Tryb \"Gorące Krzesło\"");
     rozmieszczacz_->addWidget(gorace_krzeslo_);
@@ -41,5 +38,12 @@ void WyborTrybu::trybGorocegoKrzesla(bool a)
 {
     tryb_=GORACE_KRZESLO;
     loop_->quit();
-    this->close();
+}
+
+TrybyGry WyborTrybu::exec()
+{
+    loop_=new QEventLoop(this);
+    loop_->exec();
+    delete loop_;
+    return tryb_;
 }

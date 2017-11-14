@@ -7,7 +7,6 @@
 #include <QtCore/QEventLoop>
 
 //Nagłówki z katalogu QtWidgets
-#include <QtWidgets/QDialog>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QBoxLayout>
 
@@ -19,13 +18,12 @@ namespace Ui
     class WyborTrybu;
 }
 
-class WyborTrybu : public QDialog
+class WyborTrybu : public QWidget
 {
     Q_OBJECT
     
     private:
         Ui::WyborTrybu *ui;
-		QWidget* okno_;
         QVBoxLayout* rozmieszczacz_;
         QPushButton* gorace_krzeslo_;
         QEventLoop* loop_;
@@ -37,6 +35,7 @@ class WyborTrybu : public QDialog
         explicit WyborTrybu(QWidget* parent = nullptr);
         ~WyborTrybu();
         inline TrybyGry podajTrybGry()const{return tryb_;}
+        TrybyGry exec();
 		
 		
     public slots:

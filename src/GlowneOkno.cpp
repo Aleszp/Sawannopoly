@@ -8,12 +8,16 @@
 #include "TypyWyliczeniowe.hpp"
 #include "WyborTrybu.hpp"
 
+
 GlowneOkno::GlowneOkno(QWidget* parent):QMainWindow(parent)
 {
-    std::cout<<"1"<<std::endl;
     WyborTrybu wybor;
-    std::cout<<"2"<<std::endl;
-    tryb_=(TrybyGry)wybor.exec();
+    std::cout<<"1"<<std::endl;
+   // do
+    {
+        tryb_=(TrybyGry)wybor.exec();
+    }
+   // while(tryb_==BRAK_TRYBU);
 
 	setupOkno();
 	okno_->show();

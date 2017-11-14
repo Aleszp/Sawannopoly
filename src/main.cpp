@@ -1,7 +1,7 @@
 /*************************************
  * Sawannopoly                       *
  * Autor: IbilisSLZ                  *
- * Wersja: Pre-alfa-2   			 *
+ * Wersja: Pre-alfa-3   			 *
  *************************************/
 
 //Standardowe nagłówki C/C++
@@ -22,7 +22,6 @@
 #include "Pole.hpp"
 #include "Gracz.hpp"
 #include "Karta.hpp"
-
 using namespace std;
 
 int main(int argc, char *argv[])
