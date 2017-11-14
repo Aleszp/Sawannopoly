@@ -12,13 +12,7 @@
 GlowneOkno::GlowneOkno(QWidget* parent):QMainWindow(parent)
 {
     WyborTrybu wybor;
-    std::cout<<"1"<<std::endl;
-   // do
-    {
-        tryb_=(TrybyGry)wybor.exec();
-    }
-   // while(tryb_==BRAK_TRYBU);
-
+    tryb_=(TrybyGry)wybor.exec();
 	setupOkno();
 	okno_->show();
 }
