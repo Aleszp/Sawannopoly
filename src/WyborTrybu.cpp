@@ -16,9 +16,11 @@ WyborTrybu::WyborTrybu(QWidget* parent):QWidget(parent)
 
 WyborTrybu::~WyborTrybu()
 {
-    delete gorace_krzeslo_;
-    delete tytul_;
-    delete rozmieszczacz_;
+    //delete gorace_krzeslo_;
+    //delete tytul_;
+   // delete rozmieszczacz_;
+    //if(loop_!=NULL)
+        //delete loop_;
 }
 
 void WyborTrybu::setupWybor(void)
@@ -32,10 +34,11 @@ void WyborTrybu::setupWybor(void)
     gorace_krzeslo_=new QPushButton("Tryb \"Gorące Krzesło\"");
     rozmieszczacz_->addWidget(gorace_krzeslo_);
     gorace_krzeslo_->show();
-    QObject::connect(gorace_krzeslo_, SIGNAL(clicked(bool)),this, SLOT(trybGorocegoKrzesla(bool)));
+    QObject::connect(gorace_krzeslo_, SIGNAL(clicked(bool)),this, SLOT(trybGorocegoKrzesla()));
+
 }
 
-void WyborTrybu::trybGorocegoKrzesla(bool a)
+void WyborTrybu::trybGorocegoKrzesla()
 {
     tryb_=GORACE_KRZESLO;
     loop_->quit();
@@ -45,6 +48,6 @@ TrybyGry WyborTrybu::exec()
 {
     loop_=new QEventLoop(this);
     loop_->exec();
-    delete loop_;
+    //delete loop_;
     return tryb_;
 }

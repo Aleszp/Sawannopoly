@@ -13,19 +13,17 @@ GlowneOkno::GlowneOkno(QWidget* parent):QMainWindow(parent)
 {
     WyborTrybu wybor;
     setupOkno();
-    okno_->show();
 
-    glownyRozmieszczacz_=new QVBoxLayout();
-    okno_->setLayout(glownyRozmieszczacz_);
     glownyRozmieszczacz_->addWidget(&wybor);
 
-    tryb_=(TrybyGry)wybor.exec();
+
+    tryb_=wybor.exec();
 
 }
 
 GlowneOkno::~GlowneOkno()
 {
-	delete okno_;
+    //delete okno_;
 }
 
 void GlowneOkno::setupOkno(void)
@@ -33,5 +31,9 @@ void GlowneOkno::setupOkno(void)
 	okno_=new QWidget();
 	okno_->resize(1024,768);
 	okno_->setWindowTitle("Sawannopoly");
+    okno_->setAttribute( Qt::WA_DeleteOnClose );
+    glownyRozmieszczacz_=new QVBoxLayout();
+    okno_->setLayout(glownyRozmieszczacz_);
+    okno_->show();
 }
 

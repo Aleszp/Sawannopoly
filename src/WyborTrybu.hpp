@@ -41,7 +41,7 @@ class WyborTrybu : public QWidget
 		
 		
     public slots:
-        void trybGorocegoKrzesla(bool a);
+        void trybGorocegoKrzesla();
 };
 
 #endif
