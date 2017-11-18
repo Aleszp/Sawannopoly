@@ -9,9 +9,13 @@
 #include "WyborTrybu.hpp"
 
 
-GlowneOkno::GlowneOkno(QWidget* parent):QMainWindow(parent)
+GlowneOkno::GlowneOkno(std::string sciezka, QWidget* parent):QMainWindow(parent)
 {
-    WyborTrybu wybor;
+    sciezka_=sciezka;
+    char tmp[128];
+    strcpy(tmp,(sciezka_+"/res/test.png").c_str());
+    std::cout<<tmp<<std::endl;
+    WyborTrybu wybor(this);
     setupOkno();
 
     glownyRozmieszczacz_->addWidget(&wybor);
@@ -19,10 +23,20 @@ GlowneOkno::GlowneOkno(QWidget* parent):QMainWindow(parent)
 
     tryb_=wybor.exec();
 
+    image_ = new QLabel(this);
+
+
+    mypix_ = new QPixmap(tmp);
+    image_->setPixmap(*mypix_);
+    glownyRozmieszczacz_->addWidget(image_);
+    image_->show();
+    update();
 }
 
 GlowneOkno::~GlowneOkno()
 {
+    delete mypix_;
+    delete image_;
     //delete okno_;
 }
 
