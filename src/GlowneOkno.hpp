@@ -17,10 +17,13 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 
+
 namespace Ui 
 {
 	class GlowneOkno;
 }
+
+class Silnik;
 
 class GlowneOkno : public QMainWindow
 {
@@ -28,6 +31,7 @@ class GlowneOkno : public QMainWindow
     
     private:
 		Ui::GlowneOkno *ui;
+        Silnik* silnik_;
 		QWidget* okno_;
         TrybyGry tryb_;
         QVBoxLayout* glownyRozmieszczacz_;
@@ -38,7 +42,7 @@ class GlowneOkno : public QMainWindow
 		void setupOkno(void);
 
 	public:
-        explicit GlowneOkno(std::string sciezka, QWidget* parent = nullptr);
+        explicit GlowneOkno(Silnik* silnik,std::string sciezka, QWidget* parent = nullptr);
 		~GlowneOkno();
 		
 		

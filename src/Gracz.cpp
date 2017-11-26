@@ -4,11 +4,12 @@
 
 //Nagłówki z katalogu programu
 #include "Gracz.hpp"
-#include "Bank.hpp"
 #include "Pole.hpp"
+#include "Silnik.hpp"
 
-Gracz::Gracz(std::string imie="???", uint64_t gotowka=0)
+Gracz::Gracz(Silnik* silnik=NULL, std::string imie="???", uint64_t gotowka=0)
 {
+    silnik_=silnik;
 	imie_=imie;
 	gotowka_=gotowka;
 	polozenie_=0;
@@ -31,24 +32,26 @@ void Gracz::ruszNKrokow(int8_t n)
 		gotowka_+=20;
 		polozenie_-=40;
 	}
-    std::cout<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<(pola[polozenie_].podajNazwe())<<") z terytorium "<<(uint16_t)pola[polozenie_].podajTerytorium()<<" mając "<<gotowka_<<" żuczków i "<<(uint16_t)podajLiczbeWolnychLwic()<<" wolną(e/ych) lwic."<<std::endl;
-	pola[polozenie_].akcja(this);
+    std::cout<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<( silnik_->podajPole(polozenie_)->podajNazwe())<<") z terytorium "<<(uint16_t) silnik_->podajPole(polozenie_)->podajTerytorium()<<" mając "<<gotowka_<<" żuczków i "<<(uint16_t)podajLiczbeWolnychLwic()<<" wolną(e/ych) lwic."<<std::endl;
+    silnik_->podajPole(polozenie_)->akcja(this);
 }
 
 void Gracz::idzDoPola(uint8_t cel)
 {
 	polozenie_=cel;
-	pola[polozenie_].akcja(this);
+    silnik_->podajPole(polozenie_)->akcja(this);
 }
 
-void Gracz::zabierzPole(uint8_t id, Gracz* nowyWlasciciel=&bank)
+void Gracz::zabierzPole(uint8_t id, Gracz* nowyWlasciciel=NULL)
 {
-	pola[id].ustawWlasciciela(nowyWlasciciel);
+    if(nowyWlasciciel==NULL)
+        nowyWlasciciel=silnik_->podajBank();
+     silnik_->podajPole(id)->ustawWlasciciela(nowyWlasciciel);
 }
 
 void Gracz::dajPole(uint8_t id)
 {
-	pola[id].ustawWlasciciela(this);
+     silnik_->podajPole(id)->ustawWlasciciela(this);
 }
 
 void Gracz::ustawWygnanie(bool wygnany)
@@ -70,6 +73,8 @@ void Gracz::rzutKoscia()
 	uint8_t wynik[2];
 	wynik[0]=rand()%6+1;
 	wynik[1]=rand()%6+1;
+
+    silnik_->ustawKostki(wynik[0],wynik[1]);
 	
 	std::cout<<"Wyrzucono: "<<(uint16_t)wynik[0]<<" i "<<(uint16_t)wynik[1]<<"! ";
 	
@@ -98,7 +103,7 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 	if(gotowka_>=kwota)
 	{
 		gotowka_-=kwota;
-		if(komu!=&bank)
+        if(komu!=(silnik_->podajBank()))
 			komu->dodajGotowke(kwota);
 	}
 	else
@@ -106,7 +111,7 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 		if(wymusGotowke(kwota))
 		{	
 			gotowka_-=kwota;
-			if(komu!=&bank)
+            if(komu!=(silnik_->podajBank()))
 				komu->dodajGotowke(kwota);
 		}
 		else
@@ -137,30 +142,6 @@ void Gracz::zabierzLwice(uint8_t ile)
 	}
 }
 
-uint8_t Gracz::policzWszystkieLwice()
-{
-	uint8_t liczbaLwic=wolneLwice_;
-	
-	for (std::vector<Pole>::const_iterator it = pola.begin();it != pola.end(); ++it)
-	{
-		if(it->podajWlasciciela()==this)
-			liczbaLwic+=it->podajLiczbeLwic();
-	}	
-	return liczbaLwic;
-}
-
-uint8_t Gracz::policzWszystkieZiemie()
-{
-	uint8_t liczbaPol=0;
-	
-	for (std::vector<Pole>::const_iterator it = pola.begin();it != pola.end(); ++it)
-	{
-		if(it->podajWlasciciela()==this)
-			liczbaPol++;
-	}	
-	return liczbaPol;
-}
-
 bool Gracz::wymusGotowke(uint16_t kwota)
 {
 	while(gotowka_<=kwota)
@@ -181,8 +162,18 @@ bool Gracz::wymusLwice(uint8_t ile)
 
 bool Gracz::czyMaPole(uint8_t id) 
 {
-	if(pola[id].podajWlasciciela()==this)
+    if( silnik_->podajPole(id)->podajWlasciciela()==this)
 		return true;
 	else
 		return false;
+}
+
+uint8_t Gracz::policzWszystkieLwice()
+{
+    return silnik_->policzWszystkieLwice(this);
+}
+
+uint8_t Gracz::policzWszystkieZiemie()
+{
+    return silnik_->policzWszystkieZiemie(this);
 }

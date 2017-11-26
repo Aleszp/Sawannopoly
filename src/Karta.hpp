@@ -9,8 +9,6 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 
-#define SCIEZKA_DO_DANYCH_KART ((sciezka+"/data/karty.csv").c_str())
-
 class Gracz;
 class Pole;
 
@@ -32,13 +30,5 @@ class Karta
 		inline EfektKarty podajEfekt(uint8_t ii)const{return efekty_[ii];}
 		inline int16_t podajLiczbe(uint8_t ii)const{return liczby_[ii];}
 };
-
-void pobierzKarte(TypKarty talia, Gracz* gracz);
-void uzyjKarty(Karta karta, Gracz* gracz);
-
-void wczytajKarty(std::string sciezka);
-void przetasujKarty(TypKarty talia);
-
-extern std::list<Karta>karty[2];
 
 #endif

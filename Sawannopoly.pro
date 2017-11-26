@@ -10,23 +10,25 @@ MOC_DIR = moc
 INCLUDEPATH += .
 
 HEADERS += \
-    src/Bank.hpp \
     src/GlowneOkno.hpp \
     src/Gracz.hpp \
     src/inne.hpp \
     src/Karta.hpp \
     src/Pole.hpp \
     src/TypyWyliczeniowe.hpp \
-    src/WyborTrybu.hpp
+    src/WyborTrybu.hpp \
+    src/Silnik.hpp \
+    src/Kostka.hpp
 
 SOURCES += \
-    src/Bank.cpp \
     src/GlowneOkno.cpp \
     src/Gracz.cpp \
     src/inne.cpp \
     src/Karta.cpp \
     src/main.cpp \
     src/Pole.cpp \
-    src/WyborTrybu.cpp
+    src/WyborTrybu.cpp \
+    src/Silnik.cpp \
+    src/Kostka.cpp
 
 

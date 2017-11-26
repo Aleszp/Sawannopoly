@@ -11,10 +11,12 @@
 #include "TypyWyliczeniowe.hpp"
 
 class Pole;
+class Silnik;
 
 class Gracz
 {
     private:
+        Silnik* silnik_;
 		std::string imie_;
 		uint64_t gotowka_;
 		uint8_t polozenie_;
@@ -24,7 +26,7 @@ class Gracz
 		bool kartaPowrotuZWygnania_;
 
 	public:
-		explicit Gracz(std::string imie, uint64_t gotowka);
+        explicit Gracz(Silnik* silnik, std::string imie, uint64_t gotowka);
 		~Gracz();
 		
 		void ruszNKrokow(int8_t n);
@@ -37,11 +39,13 @@ class Gracz
 		void bankrutuj_na_rzecz(Gracz* komu);
 		void zabierzLwice(uint8_t ile);
 		
-		uint8_t policzWszystkieLwice();
-		uint8_t policzWszystkieZiemie();
+
 		bool wymusGotowke(uint16_t kwota);
 		bool wymusLwice(uint8_t ile);
 		bool czyMaPole(uint8_t id);
+
+        uint8_t policzWszystkieLwice();
+        uint8_t policzWszystkieZiemie();
 
 		inline uint8_t podajLiczbeWolnychLwic(){return wolneLwice_;}
 		inline uint8_t podajPolozenie()const{return polozenie_;}

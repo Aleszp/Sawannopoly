@@ -7,10 +7,13 @@
 #include "GlowneOkno.hpp"
 #include "TypyWyliczeniowe.hpp"
 #include "WyborTrybu.hpp"
+#include "Silnik.hpp"
 
+class silnik;
 
-GlowneOkno::GlowneOkno(std::string sciezka, QWidget* parent):QMainWindow(parent)
+GlowneOkno::GlowneOkno(Silnik* silnik, std::string sciezka, QWidget* parent):QMainWindow(parent)
 {
+    silnik_=silnik;
     sciezka_=sciezka;
     char tmp[128];
     strcpy(tmp,(sciezka_+"/res/test.png").c_str());

@@ -5,15 +5,15 @@
 
 //Nagłówki z katalogu programu
 #include "Pole.hpp"
-#include "Bank.hpp"
 #include "Karta.hpp"
 #include "inne.hpp"
+#include "Silnik.hpp"
 
 uint8_t licznikPol=0;
-std::vector<Pole> pola;
 
 Pole::Pole()
 {
+    silnik_=NULL;;
 	id_=licznikPol;
 	typ_=STANDARDOWE;
 	nazwa_="???";
@@ -23,14 +23,15 @@ Pole::Pole()
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=(uint8_t)0;
 	zastawione_=false;
-	wlasciciel_=&bank;
+    wlasciciel_=NULL;
 	lwice_=0;
 	
 	licznikPol++;
 }
 
-Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywolawcza, uint16_t* czynsze, uint8_t terytorium)
+Pole::Pole(Silnik* silnik,TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywolawcza, uint16_t* czynsze, uint8_t terytorium)
 {
+    silnik_=silnik;
 	id_=licznikPol;
 	typ_=typ;
 	nazwa_=nazwa;
@@ -40,7 +41,7 @@ Pole::Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywol
 	for(uint8_t ii=0;ii<6;ii++)
 		czynsze_[ii]=czynsze[ii];
 	zastawione_=false;
-	wlasciciel_=&bank;
+    wlasciciel_=silnik_->podajBank();
 	lwice_=0;
 	
 	licznikPol++;
@@ -69,7 +70,7 @@ void Pole::akcja(Gracz* gracz)
 	}
 	else
 	{
-		if(podajWlasciciela()!=&bank)
+        if(podajWlasciciela()!=silnik_->podajBank())
 		{
 			std::cout<<"To pole należy do gracza "<<wlasciciel_->podajImie()<<"."<<std::endl;
 		}
@@ -77,16 +78,14 @@ void Pole::akcja(Gracz* gracz)
 		{
 			case STANDARDOWE:
 			{
-				if(wlasciciel_==&bank) 	//jeśli niczyje - dać wybór między kupnem a licytacją
+                if(wlasciciel_==silnik_->podajBank()) 	//jeśli niczyje - dać wybór między kupnem a licytacją
 				{
-					
 				}
 				else //jeśli innego gracza pobrać czynsz (z uwzględnieniem kompletności terytoriów oraz liczby lwic)
 				{
-					
 					uint16_t kwota=czynsze_[0];
 					
-					if(sprawdz_kompletnosc_terytorium(this))
+                    if(silnik_->sprawdz_kompletnosc_terytorium(this))
 					{
 						std::cout<<"To pole stanowi kompletne terytorium ";
 						if(lwice_>0)
@@ -100,51 +99,63 @@ void Pole::akcja(Gracz* gracz)
 			}
 			break;
 			case START:	
-				//gotówkę zwiększa funkcja przesuwająca, więc tu nic się nie dzieje
+            {
+                //gotówkę zwiększa funkcja przesuwająca, więc tu nic się nie dzieje
+            }
 			break;
 			case LATWA_ZDOBYCZ:
 			{
-				pobierzKarte(KARTY_LATWEJ_ZDOBYCZY, gracz);
+                silnik_->pobierzKarte(KARTY_LATWEJ_ZDOBYCZY, gracz);
 				//wywołać obsługę Łatwej zdobyczy
 			}
 			break;
 			case DLA_DOBRA_STADA:
-			{
+            {
 				//wywołać obsługę Dla dobra stada
-				pobierzKarte(KARTY_DLA_DOBRA_STADA, gracz);
+                silnik_->pobierzKarte(KARTY_DLA_DOBRA_STADA, gracz);
 			}
 			break;
 			case POSILEK:
-				gracz->zaplac(wartosc_,&bank);
+            {
+                gracz->zaplac(wartosc_,silnik_->podajBank());
+            }
 			break;
 			case UZYTECZNOSC:
-			{
+            {
 				//jeśli niczyje - dać wybór między kupnem a licytacją
 				//jeśli innego gracza pobrać czynsz (z uwzględnieniem posiadania będź nie obu ujęć)
 			}
 			break;
 			case GRANICA:
-			{
+            {
 				//jeśli niczyje - dać wybór między kupnem a licytacją
 				//jeśli innego gracza pobrać czynsz (z uwzględnieniem posiadania poszczególnych granic)
 			}
 			break;
 			case WYGNANIE:
-				//tu nic się nie dzieje
+            {
+                //tu nic się nie dzieje
+            }
 			break;
 			case POGRANICZE:
-				//tu nic się nie dzieje
+            {
+                //tu nic się nie dzieje
+            }
 			break;
 			case UDAJ_SIE_NA_WYGNANIE:
-			{
+            {
 				gracz->ustawWygnanie(true);
 			}
 			break;
 			case BEZTROSKI_BAOBAB:
+            {
 				//tu nic się nie dzieje
+            }
 			break;
 			default:
+            {
 				std::cerr<<"Gracz "<<gracz->podajImie()<<" stanął na nieobsługiwanym polu o id: "<<id_<<"."<<std::endl;
+            }
 			break;
 		}
 	}
@@ -153,9 +164,9 @@ void Pole::akcja(Gracz* gracz)
 void Pole::wykup()
 {
 	if(wlasciciel_->podajGotowke()>=(wartosc_*3)/5)
-		{
-			wlasciciel_->zaplac((wartosc_*3)/5,&bank);
-		}
+    {
+        wlasciciel_->zaplac((wartosc_*3)/5,silnik_->podajBank());
+    }
 }
 
 void Pole::zastaw()
@@ -175,7 +186,7 @@ void Pole::dodajLwice()
 	{
 		lwice_++;
 		wlasciciel_->dodajLwice(-1);
-		wlasciciel_->zaplac(KOSZT_USTAWIENIA_LWICY,&bank);
+        wlasciciel_->zaplac(KOSZT_USTAWIENIA_LWICY,silnik_->podajBank());
 	}
 	else
 	{
@@ -199,86 +210,4 @@ bool Pole::czyMoznaDodacLwice()
 		return true;
 	else	
 		return false;
-}
-
-/*********************************************************************/
-
-void utworzPola(std::string sciezka)
-{
-	FILE* danePol=fopen(SCIEZKA_DO_DANYCH_POL,"r");
-	
-	//sprawdź czy istnieje plik
-	if(danePol==NULL)
-	{
-		fprintf(stderr,"Błąd otwarcie pliku bazy danych nieruchomości.\n");
-		fprintf(stderr,"Sprawdź, czy plik %s istnieje.\n",SCIEZKA_DO_DANYCH_POL);
-		exit(BRAK_DANYCH_POL);
-	}
-	
-	char tmp[128];
-	std::string tmpString;
-	
-	TypPola tmpTyp=static_cast<TypPola>(0);
-	char tmpNazwa[64];
-	uint16_t tmpWartosc;
-	uint16_t tmpCenaWywolawcza;
-	uint8_t tmpTerytorium;
-	uint16_t tmpCzynsze[6];
-	//Wczytaj dane w formacie: TypPola, Nazwa pola, Wartość, Cena wywoławcza, czynsze[0-6]
-	while(licznikPol<41)
-	{
-		if(feof(danePol))
-		{
-			fprintf(stderr,"Niekompletna tablica danych o nieruchomościach.\n");
-			fprintf(stderr,"Sprawdź, czy plik %s jest kompletny.\n",SCIEZKA_DO_DANYCH_POL);
-			
-			fclose(danePol);
-			exit(NIEKOMPLETNE_DANE_POL);
-		}
-		
-		fgets(tmp,128,danePol);
-		if(tmp[0]=='#')	//jeśli linijka stanowi komentarz
-			continue;
-			
-		tmpString=wytnij(tmp);
-		tmpTyp=static_cast<TypPola>(atoi(tmpString.c_str()));
-		tmpString=wytnij(tmp);
-		strcpy(tmpNazwa, tmpString.c_str());
-		
-		tmpString=wytnij(tmp);
-		tmpWartosc=atoi(tmpString.c_str());
-		
-		tmpString=wytnij(tmp);
-		tmpCenaWywolawcza=atoi(tmpString.c_str());
-		
-		tmpString=wytnij(tmp);
-		tmpTerytorium=atoi(tmpString.c_str());
-		
-		for(uint8_t ii=0;ii<6;ii++)
-		{
-			tmpString=wytnij(tmp);
-			tmpCzynsze[ii]=atoi(tmpString.c_str());
-		}
-		
-		pola.push_back(Pole(tmpTyp, tmpNazwa, tmpWartosc, tmpCenaWywolawcza, tmpCzynsze,tmpTerytorium));
-	}
-	
-	
-	fclose(danePol);
-}
-
-
-bool sprawdz_kompletnosc_terytorium(const Pole* const  pole)
-{
-	for(uint8_t ii=0;ii<40;ii++)
-	{
-		if(pola[ii].podajTerytorium()==pole->podajTerytorium())
-		{
-			if(pola[ii].podajWlasciciela()!=pole->podajWlasciciela())
-			{
-				return false;
-			}
-		}
-	}
-	return true;
 }

@@ -12,7 +12,7 @@
 #include "TypyWyliczeniowe.hpp"
 #include "Gracz.hpp"
 
-#define SCIEZKA_DO_DANYCH_POL ((sciezka+"/data/pola.csv").c_str())
+class Silnik;
 
 const uint8_t KOSZT_USTAWIENIA_LWICY=15;
 
@@ -33,10 +33,11 @@ class Pole
 		bool zastawione_;
 		Gracz* wlasciciel_;
 		std::list<Gracz*> obecniGracze_;	//lista wskaźników na aktualnie stojących tu graczy
+        Silnik* silnik_;
 		
 	public:
-		explicit Pole();
-		explicit Pole(TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywolawcza, uint16_t* czynsze, uint8_t terytorium);
+        explicit Pole();
+        explicit Pole(Silnik* silnik,TypPola typ, std::string nazwa, uint16_t wartosc, uint16_t cena_wywolawcza, uint16_t* czynsze, uint8_t terytorium);
 		~Pole();
 		
 		void akcja(Gracz* gracz);
@@ -66,9 +67,6 @@ class Pole
 
 
 extern uint8_t licznikPol;
-extern std::vector<Pole> pola;
 
-void utworzPola(std::string sciezka);
-bool sprawdz_kompletnosc_terytorium(const Pole* const pole);
 
 #endif
