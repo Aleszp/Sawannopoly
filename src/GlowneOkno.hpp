@@ -16,6 +16,7 @@
 
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
+#include "WyborTrybu.hpp"
 
 
 namespace Ui 
@@ -31,11 +32,14 @@ class GlowneOkno : public QMainWindow
     
     private:
 		Ui::GlowneOkno *ui;
-        Silnik* silnik_;
-		QWidget* okno_;
         TrybyGry tryb_;
-        QVBoxLayout* glownyRozmieszczacz_;
         std::string sciezka_;
+
+        QVBoxLayout* glownyRozmieszczacz_;
+        QWidget* okno_;
+        Silnik* silnik_;
+        WyborTrybu* wybor_;
+
         QLabel* image_;
         QPixmap* mypix_;
 
@@ -44,10 +48,14 @@ class GlowneOkno : public QMainWindow
 	public:
         explicit GlowneOkno(Silnik* silnik,std::string sciezka, QWidget* parent = nullptr);
 		~GlowneOkno();
-		
+        void wlaczMenuGlowne();
+        void wlaczGoraceKrzeslo();
+
+        inline void ustawTryb(TrybyGry tryb){tryb_=tryb;}
 		
 	//public slots:
-		
+
+
 };
 
 #endif

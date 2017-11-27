@@ -21,7 +21,7 @@ class Silnik : public QThread
     Q_OBJECT
 
     private:
-        TrybyGry* tryb_;
+        TrybyGry tryb_;
         GlowneOkno* glowneOkno_;
         std::string sciezka_;
 
@@ -52,6 +52,9 @@ class Silnik : public QThread
 
         uint8_t policzWszystkieZiemie(Gracz *gracz);
         uint8_t policzWszystkieLwice(Gracz *gracz);
+
+    public slots:
+        void zmienTryb(TrybyGry tryb);
 };
 
 #endif

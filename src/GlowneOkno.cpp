@@ -15,25 +15,9 @@ GlowneOkno::GlowneOkno(Silnik* silnik, std::string sciezka, QWidget* parent):QMa
 {
     silnik_=silnik;
     sciezka_=sciezka;
-    char tmp[128];
-    strcpy(tmp,(sciezka_+"/res/test.png").c_str());
-    std::cout<<tmp<<std::endl;
-    WyborTrybu wybor(this);
     setupOkno();
 
-    glownyRozmieszczacz_->addWidget(&wybor);
-
-
-    tryb_=wybor.exec();
-
-    image_ = new QLabel(this);
-
-
-    mypix_ = new QPixmap(tmp);
-    image_->setPixmap(*mypix_);
-    glownyRozmieszczacz_->addWidget(image_);
-    image_->show();
-    update();
+    tryb_=BRAK_TRYBU;
 }
 
 GlowneOkno::~GlowneOkno()
@@ -54,3 +38,24 @@ void GlowneOkno::setupOkno(void)
     okno_->show();
 }
 
+void GlowneOkno::wlaczMenuGlowne()
+{
+    wybor_=new WyborTrybu(this);
+    glownyRozmieszczacz_->addWidget(wybor_);
+    tryb_=wybor_->exec();
+    delete wybor_;
+    silnik_->zmienTryb(tryb_);
+}
+
+void GlowneOkno::wlaczGoraceKrzeslo()
+{
+    image_ = new QLabel(this);
+
+    char tmp[128];
+    strcpy(tmp,(sciezka_+"/res/test.png").c_str());
+    mypix_ = new QPixmap(tmp);
+    image_->setPixmap(*mypix_);
+    glownyRozmieszczacz_->addWidget(image_);
+    image_->show();
+    update();
+}

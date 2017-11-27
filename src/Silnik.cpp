@@ -14,6 +14,8 @@ Silnik::Silnik(std::string sciezka)
     bank_=new Gracz(this,"Bank", UINT64_MAX/2);
     utworzPola();
     wczytajKarty();
+
+    zmienTryb(BRAK_TRYBU);
 }
 
 Silnik::~Silnik()
@@ -263,6 +265,38 @@ uint8_t Silnik::policzWszystkieLwice(Gracz* gracz)
             liczbaLwic+=it->podajLiczbeLwic();
     }
     return liczbaLwic;
+}
+
+void Silnik::zmienTryb(TrybyGry tryb)
+{
+    //Posprzątaj
+    switch(tryb_)
+    {
+        case BRAK_TRYBU:
+            //nie rób nic
+        break;
+        case GORACE_KRZESLO:
+            //sprzątnij tryb gorącego krzesła
+        break;
+        default:
+            //nie rób nic
+        break;
+    }
+
+    tryb_=tryb;
+    glowneOkno_->ustawTryb(tryb_);
+    switch(tryb_)
+    {
+        case BRAK_TRYBU:
+            glowneOkno_->wlaczMenuGlowne();
+        break;
+        case GORACE_KRZESLO:
+            glowneOkno_->wlaczGoraceKrzeslo();
+        break;
+        default:
+            glowneOkno_->wlaczMenuGlowne();
+        break;
+    }
 }
 
 uint8_t Silnik::policzWszystkieZiemie(Gracz* gracz)
