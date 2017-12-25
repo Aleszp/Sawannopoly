@@ -26,6 +26,9 @@ Gracz::~Gracz()
 
 void Gracz::ruszNKrokow(int8_t n)
 {
+    std::cout<<"Zaraz zabiorę gracza "<<podajImie()<<" z pola "<<silnik_->podajPole(polozenie_)->podajNazwe()<<std::endl;
+    silnik_->podajPole(polozenie_)->zabierzGracza(this);
+
 	polozenie_+=n;
 	if(polozenie_>39)
 	{
@@ -33,6 +36,7 @@ void Gracz::ruszNKrokow(int8_t n)
 		polozenie_-=40;
 	}
     std::cout<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<( silnik_->podajPole(polozenie_)->podajNazwe())<<") z terytorium "<<(uint16_t) silnik_->podajPole(polozenie_)->podajTerytorium()<<" mając "<<gotowka_<<" żuczków i "<<(uint16_t)podajLiczbeWolnychLwic()<<" wolną(e/ych) lwic."<<std::endl;
+    silnik_->podajPole(polozenie_)->dodajGracza(this);
     silnik_->podajPole(polozenie_)->akcja(this);
 }
 

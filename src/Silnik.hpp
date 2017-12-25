@@ -42,13 +42,13 @@ class Silnik : public QThread
         void pobierzKarte(TypKarty talia, Gracz* gracz);
         void uzyjKarty(Karta karta, Gracz* gracz);
 
-
         void utworzPola();
         bool sprawdz_kompletnosc_terytorium(const Pole* const pole);
 
         inline void ustawKostki(uint8_t k1,uint8_t k2){kostki_[0].ustaw(k1);kostki_[1].ustaw(k2);}
         inline Gracz* podajBank(){return bank_;}
         inline Pole* podajPole(uint8_t polozenie){return &pola[polozenie];}
+        inline std::string podajSciezke(){return glowneOkno_->podajSciezke();}
 
         uint8_t policzWszystkieZiemie(Gracz *gracz);
         uint8_t policzWszystkieLwice(Gracz *gracz);

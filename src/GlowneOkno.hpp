@@ -52,6 +52,7 @@ class GlowneOkno : public QMainWindow
         void wlaczGoraceKrzeslo();
 
         inline void ustawTryb(TrybyGry tryb){tryb_=tryb;}
+        inline std::string podajSciezke(){return sciezka_;}
 		
 	//public slots:
 

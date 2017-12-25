@@ -16,8 +16,6 @@ class Silnik;
 
 const uint8_t KOSZT_USTAWIENIA_LWICY=15;
 
-//Deklaracja istnienia klasy Gracz
-
 class Pole
 {
     private:
@@ -47,8 +45,11 @@ class Pole
 		void odejmijLwice();
 		void wykup();
 		void zastaw();
-		
+        void zabierzGracza(Gracz* gracz);
+        void dodajGracza(Gracz* gracz);
+
 		bool czyMoznaDodacLwice();
+        bool czyJestGracz(Gracz* gracz);
 		
 		inline uint8_t podajId()const{return id_;}
 		inline uint8_t podajLiczbeLwic()const{return lwice_;}

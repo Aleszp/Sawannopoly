@@ -211,3 +211,42 @@ bool Pole::czyMoznaDodacLwice()
 	else	
 		return false;
 }
+
+void Pole::zabierzGracza(Gracz* gracz)
+{
+    if(czyJestGracz(gracz))
+    {
+        for (std::list<Gracz*>::const_iterator it = obecniGracze_.begin();it != obecniGracze_.end(); ++it)
+        {
+            if(*it==gracz)
+            {
+                obecniGracze_.erase(it);
+                it = obecniGracze_.begin();
+            }
+        }
+        std::cout<<"Usunięto gracza "<<gracz->podajImie()<<" z pola "<<podajNazwe()<<std::endl;
+    }
+}
+
+void Pole::dodajGracza(Gracz* gracz)
+{
+    if(!czyJestGracz(gracz))
+    {
+       obecniGracze_.push_back(gracz);
+    }
+    std::cout<<"Ustawiono gracza "<<gracz->podajImie()<<" na pole "<<podajNazwe()<<std::endl;
+}
+
+bool Pole::czyJestGracz(Gracz* gracz)
+{
+    for (std::list<Gracz*>::const_iterator it = obecniGracze_.begin();it != obecniGracze_.end(); ++it)
+    {
+        if(*it==gracz)
+        {
+            std::cout<<"Gracza "<<gracz->podajImie()<<" jest na polu "<<podajNazwe()<<std::endl;
+            return true;
+        }
+    }
+    std::cout<<"Nie ma gracza "<<gracz->podajImie()<<" na polu "<<podajNazwe()<<std::endl;
+    return false;
+}

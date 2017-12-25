@@ -18,7 +18,9 @@ HEADERS += \
     src/TypyWyliczeniowe.hpp \
     src/WyborTrybu.hpp \
     src/Silnik.hpp \
-    src/Kostka.hpp
+    src/Kostka.hpp \
+    src/Plansza.hpp \
+    src/PoleGraficzne.hpp
 
 SOURCES += \
     src/GlowneOkno.cpp \
@@ -29,6 +31,8 @@ SOURCES += \
     src/Pole.cpp \
     src/WyborTrybu.cpp \
     src/Silnik.cpp \
-    src/Kostka.cpp
+    src/Kostka.cpp \
+    src/Plansza.cpp \
+    src/PoleGraficzne.cpp
 
 
