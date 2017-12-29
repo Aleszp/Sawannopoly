@@ -25,7 +25,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	srand (time (NULL));
-	QApplication Aplikacja(argc, argv);
+    QApplication Aplikacja(argc, argv);
 	
 	std::string sciezka=Aplikacja.applicationDirPath().toStdString();	//Pozyskaj ścieżkę do katalogu pliku wykonywalnego
 

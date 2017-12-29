@@ -10,7 +10,6 @@ Silnik::Silnik(std::string sciezka)
     sciezka_=sciezka;
 
     glowneOkno_= new GlowneOkno(this, sciezka_);
-
     bank_=new Gracz(this,"Bank", UINT64_MAX/2);
     utworzPola();
     wczytajKarty();

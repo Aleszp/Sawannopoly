@@ -13,6 +13,7 @@ class silnik;
 
 GlowneOkno::GlowneOkno(Silnik* silnik, std::string sciezka, QWidget* parent):QMainWindow(parent)
 {
+    //showFullScreen();
     silnik_=silnik;
     sciezka_=sciezka;
     setupOkno();
@@ -30,12 +31,12 @@ GlowneOkno::~GlowneOkno()
 void GlowneOkno::setupOkno(void)
 {
 	okno_=new QWidget();
-	okno_->resize(1024,768);
+    okno_->resize(1920,1080);
 	okno_->setWindowTitle("Sawannopoly");
     okno_->setAttribute( Qt::WA_DeleteOnClose );
     glownyRozmieszczacz_=new QVBoxLayout();
     okno_->setLayout(glownyRozmieszczacz_);
-    okno_->show();
+    okno_->showFullScreen();
 }
 
 void GlowneOkno::wlaczMenuGlowne()
