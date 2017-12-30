@@ -8,6 +8,7 @@
 #include "TypyWyliczeniowe.hpp"
 #include "WyborTrybu.hpp"
 #include "Silnik.hpp"
+#include "Plansza.hpp"
 
 class silnik;
 
@@ -50,13 +51,16 @@ void GlowneOkno::wlaczMenuGlowne()
 
 void GlowneOkno::wlaczGoraceKrzeslo()
 {
-    image_ = new QLabel(this);
+    /*image_ = new QLabel(this);
 
     char tmp[128];
     strcpy(tmp,(sciezka_+"/res/test.png").c_str());
     mypix_ = new QPixmap(tmp);
     image_->setPixmap(*mypix_);
     glownyRozmieszczacz_->addWidget(image_);
-    image_->show();
+    image_->show();*/
+    plansza_=new Plansza(silnik_,this);
+    glownyRozmieszczacz_->addWidget(plansza_);
+
     update();
 }

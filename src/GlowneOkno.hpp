@@ -18,6 +18,7 @@
 #include "TypyWyliczeniowe.hpp"
 #include "WyborTrybu.hpp"
 
+class Plansza;
 
 namespace Ui 
 {
@@ -42,6 +43,8 @@ class GlowneOkno : public QMainWindow
 
         QLabel* image_;
         QPixmap* mypix_;
+
+        Plansza* plansza_;
 
 		void setupOkno(void);
 

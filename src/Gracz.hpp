@@ -38,7 +38,6 @@ class Gracz
 		void zaplac(uint16_t kwota, Gracz* komu);
 		void bankrutuj_na_rzecz(Gracz* komu);
 		void zabierzLwice(uint8_t ile);
-		
 
 		bool wymusGotowke(uint16_t kwota);
 		bool wymusLwice(uint8_t ile);

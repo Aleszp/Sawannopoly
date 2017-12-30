@@ -26,7 +26,7 @@ void Silnik::run()
 {
     Gracz test(this,"Test",1000);
 
-    for(uint8_t ii=0;ii<100;ii++)
+    for(uint8_t ii=0;ii<10;ii++)
     {
         std::cout<<(uint16_t)ii<<": ";
         if(test.podajWygnanie())
