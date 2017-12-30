@@ -1,3 +1,6 @@
+//Nagłówki z katalogu Qt
+#include <QColor>
+
 //Standardowe nagłówki C/C++
 #include <iostream>
 
@@ -21,8 +24,27 @@ PoleGraficzne::PoleGraficzne(Plansza* rodzic, uint8_t id) : QWidget(rodzic)
     wlasciciel_->setPixmap(*wlasciciel_map_);*/
 
     ilustracja_=new QLabel(this);
-    strcpy(tmp,(sciezka+std::to_string(id)+".png").c_str());
-    ilustracja_map_=new QPixmap(tmp);
+    //strcpy(tmp,(sciezka+std::to_string(id)+".png").c_str());
+    //ilustracja_map_=new QPixmap(tmp);
+    if((id>0&&id<10)||(id>20&&id<30))       //rzędy
+    {
+        setFixedSize(75,150);
+        ilustracja_map_=new QPixmap(75,150);
+    }
+    else
+    {
+        if((id>10&&id<20)||(id>30&&id<40))       //kolumny
+        {
+            setFixedSize(150,75);
+            ilustracja_map_=new QPixmap(150,75);
+        }
+        else //narożne
+        {
+            setFixedSize(150,150);
+            ilustracja_map_=new QPixmap(150,150);
+        }
+    }
+    ilustracja_map_->fill(id%2?QColor(255,255,255):QColor(0,0,0));
     ilustracja_->setPixmap(*ilustracja_map_);
 
     /*for(uint8_t ii=0;ii<4;ii++)
@@ -32,19 +54,4 @@ PoleGraficzne::PoleGraficzne(Plansza* rodzic, uint8_t id) : QWidget(rodzic)
         gracz_map_[ii]=new QPixmap(tmp);
         gracz_[ii]->setPixmap(*gracz_map_[ii]);
     }*/
-    if((id>0&&id<10)||(id>20&&id<30))       //rzędy
-    {
-        setFixedSize(90,180);
-    }
-    else
-    {
-        if((id>10&&id<20)||(id>30&&id<40))       //kolumny
-        {
-            setFixedSize(180,90);
-        }
-        else //narożne
-        {
-            setFixedSize(180,180);
-        }
-    }
 }
