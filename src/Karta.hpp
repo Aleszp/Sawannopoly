@@ -9,7 +9,7 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 
-class Gracz;
+class Pionek;
 class Pole;
 
 class Karta

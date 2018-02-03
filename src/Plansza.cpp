@@ -41,7 +41,7 @@ Plansza::Plansza(Silnik* silnik, QWidget* parent) : QWidget(parent)
         glownyRozmieszczacz_->addWidget(pola_[ii],ii-29,11,1,2);
     }
 
-    std::cout<<glownyRozmieszczacz_->rowCount()<<"x"<<glownyRozmieszczacz_->columnCount()<<std::endl;
+    //std::cout<<glownyRozmieszczacz_->rowCount()<<"x"<<glownyRozmieszczacz_->columnCount()<<std::endl;
     update();
 }
 

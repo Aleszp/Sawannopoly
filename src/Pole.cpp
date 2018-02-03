@@ -62,17 +62,17 @@ std::ostream& operator<<(std::ostream& wyjscie, Pole& p)
 	return wyjscie;
 }
 
-void Pole::akcja(Gracz* gracz)
+void Pole::akcja(Pionek* Pionek)
 {
-	if(podajWlasciciela()==gracz)
+    if(podajWlasciciela()==Pionek)
 	{
-		std::cout<<"To pole należy do gracza "<<wlasciciel_->podajImie()<<"."<<std::endl;
+        std::cout<<"To pole należy do Pionka "<<wlasciciel_->podajImie()<<"."<<std::endl;
 	}
 	else
 	{
         if(podajWlasciciela()!=silnik_->podajBank())
 		{
-			std::cout<<"To pole należy do gracza "<<wlasciciel_->podajImie()<<"."<<std::endl;
+            std::cout<<"To pole należy do Pionka "<<wlasciciel_->podajImie()<<"."<<std::endl;
 		}
 		switch(typ_)
 		{
@@ -81,7 +81,7 @@ void Pole::akcja(Gracz* gracz)
                 if(wlasciciel_==silnik_->podajBank()) 	//jeśli niczyje - dać wybór między kupnem a licytacją
 				{
 				}
-				else //jeśli innego gracza pobrać czynsz (z uwzględnieniem kompletności terytoriów oraz liczby lwic)
+                else //jeśli innego Pionka pobrać czynsz (z uwzględnieniem kompletności terytoriów oraz liczby lwic)
 				{
 					uint16_t kwota=czynsze_[0];
 					
@@ -94,7 +94,7 @@ void Pole::akcja(Gracz* gracz)
 						kwota=czynsze_[1+lwice_];
 					}
 					std::cout<<"Kwota do zapłaty wynosi "<<kwota<<" żuczki(ów)."<<std::endl;
-					gracz->zaplac(kwota, wlasciciel_);
+                    Pionek->zaplac(kwota, wlasciciel_);
 				}
 			}
 			break;
@@ -105,31 +105,31 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			case LATWA_ZDOBYCZ:
 			{
-                silnik_->pobierzKarte(KARTY_LATWEJ_ZDOBYCZY, gracz);
+                silnik_->pobierzKarte(KARTY_LATWEJ_ZDOBYCZY, Pionek);
 				//wywołać obsługę Łatwej zdobyczy
 			}
 			break;
 			case DLA_DOBRA_STADA:
             {
 				//wywołać obsługę Dla dobra stada
-                silnik_->pobierzKarte(KARTY_DLA_DOBRA_STADA, gracz);
+                silnik_->pobierzKarte(KARTY_DLA_DOBRA_STADA, Pionek);
 			}
 			break;
 			case POSILEK:
             {
-                gracz->zaplac(wartosc_,silnik_->podajBank());
+                Pionek->zaplac(wartosc_,silnik_->podajBank());
             }
 			break;
 			case UZYTECZNOSC:
             {
 				//jeśli niczyje - dać wybór między kupnem a licytacją
-				//jeśli innego gracza pobrać czynsz (z uwzględnieniem posiadania będź nie obu ujęć)
+                //jeśli innego Pionka pobrać czynsz (z uwzględnieniem posiadania będź nie obu ujęć)
 			}
 			break;
 			case GRANICA:
             {
 				//jeśli niczyje - dać wybór między kupnem a licytacją
-				//jeśli innego gracza pobrać czynsz (z uwzględnieniem posiadania poszczególnych granic)
+                //jeśli innego Pionka pobrać czynsz (z uwzględnieniem posiadania poszczególnych granic)
 			}
 			break;
 			case WYGNANIE:
@@ -144,7 +144,7 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			case UDAJ_SIE_NA_WYGNANIE:
             {
-				gracz->ustawWygnanie(true);
+                Pionek->ustawWygnanie(true);
 			}
 			break;
 			case BEZTROSKI_BAOBAB:
@@ -154,7 +154,7 @@ void Pole::akcja(Gracz* gracz)
 			break;
 			default:
             {
-				std::cerr<<"Gracz "<<gracz->podajImie()<<" stanął na nieobsługiwanym polu o id: "<<id_<<"."<<std::endl;
+                std::cerr<<"Pionek "<<Pionek->podajImie()<<" stanął na nieobsługiwanym polu o id: "<<id_<<"."<<std::endl;
             }
 			break;
 		}
@@ -212,41 +212,41 @@ bool Pole::czyMoznaDodacLwice()
 		return false;
 }
 
-void Pole::zabierzGracza(Gracz* gracz)
+void Pole::zabierzPionka(Pionek* Pionek)
 {
-    if(czyJestGracz(gracz))
-    {
-        for (std::list<Gracz*>::const_iterator it = obecniGracze_.begin();it != obecniGracze_.end(); ++it)
+    if(czyJestPionek(Pionek))
+    {           //std::list<Pionek*>::const_iterator
+        for (auto it = obecnePionki_.begin();it != obecnePionki_.end(); ++it)
         {
-            if(*it==gracz)
+            if(*it==Pionek)
             {
-                obecniGracze_.erase(it);
-                it = obecniGracze_.begin();
+                obecnePionki_.erase(it);
+                it = obecnePionki_.begin();
             }
         }
-        std::cout<<"Usunięto gracza "<<gracz->podajImie()<<" z pola "<<podajNazwe()<<std::endl;
+        std::cout<<"Usunięto Pionka "<<Pionek->podajImie()<<" z pola "<<podajNazwe()<<std::endl;
     }
 }
 
-void Pole::dodajGracza(Gracz* gracz)
+void Pole::dodajPionka(Pionek* Pionek)
 {
-    if(!czyJestGracz(gracz))
+    if(!czyJestPionek(Pionek))
     {
-       obecniGracze_.push_back(gracz);
+       obecnePionki_.push_back(Pionek);
     }
-    std::cout<<"Ustawiono gracza "<<gracz->podajImie()<<" na pole "<<podajNazwe()<<std::endl;
+    std::cout<<"Ustawiono Pionka "<<Pionek->podajImie()<<" na pole "<<podajNazwe()<<std::endl;
 }
 
-bool Pole::czyJestGracz(Gracz* gracz)
+bool Pole::czyJestPionek(Pionek* Pionek)
 {
-    for (std::list<Gracz*>::const_iterator it = obecniGracze_.begin();it != obecniGracze_.end(); ++it)
+    for (auto it = obecnePionki_.begin();it != obecnePionki_.end(); ++it)
     {
-        if(*it==gracz)
+        if(*it==Pionek)
         {
-            std::cout<<"Gracza "<<gracz->podajImie()<<" jest na polu "<<podajNazwe()<<std::endl;
+            std::cout<<"Pionek "<<Pionek->podajImie()<<" jest na polu "<<podajNazwe()<<std::endl;
             return true;
         }
     }
-    std::cout<<"Nie ma gracza "<<gracz->podajImie()<<" na polu "<<podajNazwe()<<std::endl;
+    std::cout<<"Nie ma Pionka "<<Pionek->podajImie()<<" na polu "<<podajNazwe()<<std::endl;
     return false;
 }

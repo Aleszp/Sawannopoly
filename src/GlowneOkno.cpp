@@ -24,8 +24,8 @@ GlowneOkno::GlowneOkno(Silnik* silnik, std::string sciezka, QWidget* parent):QMa
 
 GlowneOkno::~GlowneOkno()
 {
-    delete mypix_;
-    delete image_;
+    //delete mypix_;
+    //delete image_;
     //delete okno_;
 }
 
@@ -35,15 +35,16 @@ void GlowneOkno::setupOkno(void)
     okno_->resize(1920,1080);
 	okno_->setWindowTitle("Sawannopoly");
     okno_->setAttribute( Qt::WA_DeleteOnClose );
-    glownyRozmieszczacz_=new QVBoxLayout();
-    okno_->setLayout(glownyRozmieszczacz_);
+    rozmieszczacz_=new QBoxLayout(QBoxLayout::TopToBottom);
+    okno_->setLayout(rozmieszczacz_);
     okno_->showFullScreen();
 }
 
 void GlowneOkno::wlaczMenuGlowne()
 {
+    rozmieszczacz_->setDirection(QBoxLayout::TopToBottom);
     wybor_=new WyborTrybu(this);
-    glownyRozmieszczacz_->addWidget(wybor_);
+    rozmieszczacz_->addWidget(wybor_);
     tryb_=wybor_->exec();
     delete wybor_;
     silnik_->zmienTryb(tryb_);
@@ -57,10 +58,14 @@ void GlowneOkno::wlaczGoraceKrzeslo()
     strcpy(tmp,(sciezka_+"/res/test.png").c_str());
     mypix_ = new QPixmap(tmp);
     image_->setPixmap(*mypix_);
-    glownyRozmieszczacz_->addWidget(image_);
+    rozmieszczacz_->addWidget(image_);
     image_->show();*/
-    plansza_=new Plansza(silnik_,this);
-    glownyRozmieszczacz_->addWidget(plansza_);
 
+    rozmieszczacz_->setDirection(QBoxLayout::LeftToRight);
+    plansza_=new Plansza(silnik_,this);
+    rozmieszczacz_->addWidget(plansza_);
+    panel_=new Panel;
+    panel_->setParent(this);
+    rozmieszczacz_->addWidget(panel_);
     update();
 }

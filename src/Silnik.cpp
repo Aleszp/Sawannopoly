@@ -10,7 +10,7 @@ Silnik::Silnik(std::string sciezka)
     sciezka_=sciezka;
 
     glowneOkno_= new GlowneOkno(this, sciezka_);
-    bank_=new Gracz(this,"Bank", UINT64_MAX/2);
+    bank_=new Pionek(this,"Bank", UINT64_MAX/2);
     utworzPola();
     wczytajKarty();
 
@@ -24,7 +24,7 @@ Silnik::~Silnik()
 
 void Silnik::run()
 {
-    Gracz test(this,"Test",1000);
+    Pionek test(this,"Test",1000);
 
     for(uint8_t ii=0;ii<10;ii++)
     {
@@ -32,28 +32,28 @@ void Silnik::run()
         if(test.podajWygnanie())
         {
             test.obnizWygnanie();
-            std::cout<<"Gracz "<<test.podajImie()<<" jest na wygnaniu."<<std::endl;
+            std::cout<<"Pionek "<<test.podajImie()<<" jest na wygnaniu."<<std::endl;
             continue;
         }
         test.rzutKoscia();
     }
 }
 
-void Silnik::pobierzKarte(TypKarty talia, Gracz* gracz)
+void Silnik::pobierzKarte(TypKarty talia, Pionek* Pionek)
 {
     Karta karta=karty[talia].front();	//pobierz kartę z początku
     karty[talia].pop_front();
 
     std::cout<<"Pobrana karta: "<<karta.podajOpis()<<std::endl;
 
-    uzyjKarty(karta, gracz);
+    uzyjKarty(karta, Pionek);
 
     std::cout<<"Odkładam na koniec kartę: "<<karta.podajOpis()<<std::endl;
 
     karty[talia].push_back(karta);	//umieść kartę na sam koniec listy
 }
 
-void Silnik::uzyjKarty(Karta karta, Gracz* gracz)
+void Silnik::uzyjKarty(Karta karta, Pionek* Pionek)
 {
     //tu umieść interpreter (z trzema iteracjami)
 
@@ -66,37 +66,37 @@ void Silnik::uzyjKarty(Karta karta, Gracz* gracz)
             break;
             case ZMIANA_GOTOWKI:
                 if(karta.podajLiczbe(ii)>0)
-                    gracz->dodajGotowke(karta.podajLiczbe(ii));
+                    Pionek->dodajGotowke(karta.podajLiczbe(ii));
                 else
-                    gracz->zaplac((-1)*karta.podajLiczbe(ii),bank_);	//zmiana liczby z ujemnej na dodatnią, bo metoda zaplac pracuje na liczbach dodatnich (liczba ujemna traktowana jest jak bardzo duża liczba dodatnia ze względu na sposób reprezentacji liczb całkowitych
+                    Pionek->zaplac((-1)*karta.podajLiczbe(ii),bank_);	//zmiana liczby z ujemnej na dodatnią, bo metoda zaplac pracuje na liczbach dodatnich (liczba ujemna traktowana jest jak bardzo duża liczba dodatnia ze względu na sposób reprezentacji liczb całkowitych
             break;
             case ZMIANA_LICZBY_LWIC:
                     if(karta.podajLiczbe(ii)>0)
-                        gracz->dodajLwice(karta.podajLiczbe(ii));
+                        Pionek->dodajLwice(karta.podajLiczbe(ii));
                     else
-                        gracz->zabierzLwice((-1)*karta.podajLiczbe(ii));	//zmiana liczby z ujemnej na dodatnią, bo metoda zaplac pracuje na liczbach dodatnich (liczba ujemna traktowana jest jak bardzo duża liczba dodatnia ze względu na sposób reprezentacji liczb całkowitych
+                        Pionek->zabierzLwice((-1)*karta.podajLiczbe(ii));	//zmiana liczby z ujemnej na dodatnią, bo metoda zaplac pracuje na liczbach dodatnich (liczba ujemna traktowana jest jak bardzo duża liczba dodatnia ze względu na sposób reprezentacji liczb całkowitych
 
             break;
             case PRZESUN:
-                gracz->ruszNKrokow(karta.podajLiczbe(ii)-gracz->podajPolozenie());
+                Pionek->ruszNKrokow(karta.podajLiczbe(ii)-Pionek->podajPolozenie());
             break;
             case WYGNAJ:
-                gracz->ustawWygnanie(true);
+                Pionek->ustawWygnanie(true);
             break;
             case KARTA_POWROTU_Z_WYGNANIA:
-                gracz->ustawKartePowrotu(true);
+                Pionek->ustawKartePowrotu(true);
             break;
             case GLOD:
                 if(karta.podajLiczbe(ii)>0)
-                    gracz->zaplac((uint16_t)(gracz->policzWszystkieLwice()*karta.podajLiczbe(ii)),bank_);
+                    Pionek->zaplac((uint16_t)(Pionek->policzWszystkieLwice()*karta.podajLiczbe(ii)),bank_);
                 else
-                    gracz->dodajGotowke((uint16_t)(gracz->policzWszystkieLwice()*karta.podajLiczbe(ii)));
+                    Pionek->dodajGotowke((uint16_t)(Pionek->policzWszystkieLwice()*karta.podajLiczbe(ii)));
             break;
             case KOSZT_ZIEM:
                 if(karta.podajLiczbe(ii)>0)
-                    gracz->zaplac((uint16_t)(gracz->policzWszystkieZiemie()*karta.podajLiczbe(ii)),bank_);
+                    Pionek->zaplac((uint16_t)(Pionek->policzWszystkieZiemie()*karta.podajLiczbe(ii)),bank_);
                 else
-                    gracz->dodajGotowke((uint16_t)(gracz->policzWszystkieZiemie()*karta.podajLiczbe(ii)));
+                    Pionek->dodajGotowke((uint16_t)(Pionek->policzWszystkieZiemie()*karta.podajLiczbe(ii)));
             break;
             default:
                 std::cerr<<"Nieprawidłowy efekt karty."<<std::endl;
@@ -231,21 +231,20 @@ void Silnik::utworzPola()
             tmpCzynsze[ii]=atoi(tmpString.c_str());
         }
 
-        pola.push_back(Pole(this,tmpTyp, tmpNazwa, tmpWartosc, tmpCenaWywolawcza, tmpCzynsze,tmpTerytorium));
+        pola_.push_back(Pole(this,tmpTyp, tmpNazwa, tmpWartosc, tmpCenaWywolawcza, tmpCzynsze,tmpTerytorium));
     }
 
 
     fclose(danePol);
 }
 
-
 bool Silnik::sprawdz_kompletnosc_terytorium(const Pole* const  pole)
 {
     for(uint8_t ii=0;ii<40;ii++)
     {
-        if(pola[ii].podajTerytorium()==pole->podajTerytorium())
+        if(pola_[ii].podajTerytorium()==pole->podajTerytorium())
         {
-            if(pola[ii].podajWlasciciela()!=pole->podajWlasciciela())
+            if(pola_[ii].podajWlasciciela()!=pole->podajWlasciciela())
             {
                 return false;
             }
@@ -254,13 +253,13 @@ bool Silnik::sprawdz_kompletnosc_terytorium(const Pole* const  pole)
     return true;
 }
 
-uint8_t Silnik::policzWszystkieLwice(Gracz* gracz)
+uint8_t Silnik::policzWszystkieLwice(Pionek* Pionek)
 {
-    uint8_t liczbaLwic=gracz->podajLiczbeWolnychLwic();
+    uint8_t liczbaLwic=Pionek->podajLiczbeWolnychLwic();
 
-    for (std::vector<Pole>::const_iterator it = pola.begin();it != pola.end(); ++it)
+    for (std::vector<Pole>::const_iterator it = pola_.begin();it != pola_.end(); ++it)
     {
-        if(it->podajWlasciciela()==gracz)
+        if(it->podajWlasciciela()==Pionek)
             liczbaLwic+=it->podajLiczbeLwic();
     }
     return liczbaLwic;
@@ -298,13 +297,13 @@ void Silnik::zmienTryb(TrybyGry tryb)
     }
 }
 
-uint8_t Silnik::policzWszystkieZiemie(Gracz* gracz)
+uint8_t Silnik::policzWszystkieZiemie(Pionek* Pionek)
 {
     uint8_t liczbaPol=0;
 
-    for (std::vector<Pole>::const_iterator it = pola.begin();it != pola.end(); ++it)
+    for (std::vector<Pole>::const_iterator it = pola_.begin();it != pola_.end(); ++it)
     {
-        if(it->podajWlasciciela()==gracz)
+        if(it->podajWlasciciela()==Pionek)
             liczbaPol++;
     }
     return liczbaPol;

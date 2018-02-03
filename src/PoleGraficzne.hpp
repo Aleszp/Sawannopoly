@@ -17,8 +17,8 @@ class PoleGraficzne : public QWidget
         QLabel* ilustracja_;
         QPixmap* ilustracja_map_;
 
-        QLabel* gracz_[4];
-        QPixmap* gracz_map_[4];
+        QLabel* Pionek_[4];
+        QPixmap* Pionek_map_[4];
 
     public:
         explicit PoleGraficzne(Plansza* rodzic, uint8_t id_);

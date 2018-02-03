@@ -3,11 +3,11 @@
 #include <algorithm>
 
 //Nagłówki z katalogu programu
-#include "Gracz.hpp"
+#include "Pionek.hpp"
 #include "Pole.hpp"
 #include "Silnik.hpp"
 
-Gracz::Gracz(Silnik* silnik=NULL, std::string imie="???", uint64_t gotowka=0)
+Pionek::Pionek(Silnik* silnik=NULL, std::string imie="???", uint64_t gotowka=0)
 {
     silnik_=silnik;
 	imie_=imie;
@@ -19,15 +19,15 @@ Gracz::Gracz(Silnik* silnik=NULL, std::string imie="???", uint64_t gotowka=0)
 	kartaPowrotuZWygnania_=false;
 }
 
-Gracz::~Gracz()
+Pionek::~Pionek()
 {
 	
 }
 
-void Gracz::ruszNKrokow(int8_t n)
+void Pionek::ruszNKrokow(int8_t n)
 {
-    std::cout<<"Zaraz zabiorę gracza "<<podajImie()<<" z pola "<<silnik_->podajPole(polozenie_)->podajNazwe()<<std::endl;
-    silnik_->podajPole(polozenie_)->zabierzGracza(this);
+    std::cout<<"Zaraz zabiorę Pionka "<<podajImie()<<" z pola "<<silnik_->podajPole(polozenie_)->podajNazwe()<<std::endl;
+    silnik_->podajPole(polozenie_)->zabierzPionka(this);
 
 	polozenie_+=n;
 	if(polozenie_>39)
@@ -36,29 +36,29 @@ void Gracz::ruszNKrokow(int8_t n)
 		polozenie_-=40;
 	}
     std::cout<<imie_<<" stanął(ęła) na polu "<<(uint16_t)polozenie_<<" ("<<( silnik_->podajPole(polozenie_)->podajNazwe())<<") z terytorium "<<(uint16_t) silnik_->podajPole(polozenie_)->podajTerytorium()<<" mając "<<gotowka_<<" żuczków i "<<(uint16_t)podajLiczbeWolnychLwic()<<" wolną(e/ych) lwic."<<std::endl;
-    silnik_->podajPole(polozenie_)->dodajGracza(this);
+    silnik_->podajPole(polozenie_)->dodajPionka(this);
     silnik_->podajPole(polozenie_)->akcja(this);
 }
 
-void Gracz::idzDoPola(uint8_t cel)
+void Pionek::idzDoPola(uint8_t cel)
 {
 	polozenie_=cel;
     silnik_->podajPole(polozenie_)->akcja(this);
 }
 
-void Gracz::zabierzPole(uint8_t id, Gracz* nowyWlasciciel=NULL)
+void Pionek::zabierzPole(uint8_t id, Pionek* nowyWlasciciel=NULL)
 {
     if(nowyWlasciciel==NULL)
         nowyWlasciciel=silnik_->podajBank();
      silnik_->podajPole(id)->ustawWlasciciela(nowyWlasciciel);
 }
 
-void Gracz::dajPole(uint8_t id)
+void Pionek::dajPole(uint8_t id)
 {
      silnik_->podajPole(id)->ustawWlasciciela(this);
 }
 
-void Gracz::ustawWygnanie(bool wygnany)
+void Pionek::ustawWygnanie(bool wygnany)
 {
 	if(wygnany) 
 	{
@@ -72,7 +72,7 @@ void Gracz::ustawWygnanie(bool wygnany)
 	}
 }
 
-void Gracz::rzutKoscia()
+void Pionek::rzutKoscia()
 {
 	uint8_t wynik[2];
 	wynik[0]=rand()%6+1;
@@ -102,7 +102,7 @@ void Gracz::rzutKoscia()
 	ruszNKrokow(wynik[0]+wynik[1]);
 }
 
-void Gracz::zaplac(uint16_t kwota, Gracz* komu)
+void Pionek::zaplac(uint16_t kwota, Pionek* komu)
 {
 	if(gotowka_>=kwota)
 	{
@@ -125,12 +125,12 @@ void Gracz::zaplac(uint16_t kwota, Gracz* komu)
 	}
 }
 
-void Gracz::bankrutuj_na_rzecz(Gracz* komu)
+void Pionek::bankrutuj_na_rzecz(Pionek* komu)
 {
 	
 }
 
-void Gracz::zabierzLwice(uint8_t ile)
+void Pionek::zabierzLwice(uint8_t ile)
 {
 	while(true)
 	{
@@ -146,16 +146,16 @@ void Gracz::zabierzLwice(uint8_t ile)
 	}
 }
 
-bool Gracz::wymusGotowke(uint16_t kwota)
+bool Pionek::wymusGotowke(uint16_t kwota)
 {
 	while(gotowka_<=kwota)
 	{
-		//zezwól wyłącznie na akcje zdejmowania lwic z pól, odprawiania lwic, zastawiania terytorium lub sprzedarzy terytorium innym graczom
+        //zezwól wyłącznie na akcje zdejmowania lwic z pól, odprawiania lwic, zastawiania terytorium lub sprzedarzy terytorium innym Pionekom
 	}
 	return false;
 }
 
-bool Gracz::wymusLwice(uint8_t ile)
+bool Pionek::wymusLwice(uint8_t ile)
 {
 	while(wolneLwice_<=ile)
 	{
@@ -164,7 +164,7 @@ bool Gracz::wymusLwice(uint8_t ile)
 	return false;
 }
 
-bool Gracz::czyMaPole(uint8_t id) 
+bool Pionek::czyMaPole(uint8_t id)
 {
     if( silnik_->podajPole(id)->podajWlasciciela()==this)
 		return true;
@@ -172,12 +172,12 @@ bool Gracz::czyMaPole(uint8_t id)
 		return false;
 }
 
-uint8_t Gracz::policzWszystkieLwice()
+uint8_t Pionek::policzWszystkieLwice()
 {
     return silnik_->policzWszystkieLwice(this);
 }
 
-uint8_t Gracz::policzWszystkieZiemie()
+uint8_t Pionek::policzWszystkieZiemie()
 {
     return silnik_->policzWszystkieZiemie(this);
 }

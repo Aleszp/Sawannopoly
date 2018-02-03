@@ -11,10 +11,9 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 #include "GlowneOkno.hpp"
-#include "Gracz.hpp"
+#include "Pionek.hpp"
 #include "Pole.hpp"
 #include "Karta.hpp"
-#include "Kostka.hpp"
 
 class Silnik : public QThread
 {
@@ -25,11 +24,10 @@ class Silnik : public QThread
         GlowneOkno* glowneOkno_;
         std::string sciezka_;
 
-        Kostka kostki_[2];
-        Gracz* gracze_;
-        Gracz* bank_;
+        Pionek* pionki_;
+        Pionek* bank_;
         std::list<Karta>karty[2];
-        std::vector<Pole> pola;
+        std::vector<Pole> pola_;
 
     public:
         Silnik(std::string sciezka);
@@ -39,19 +37,19 @@ class Silnik : public QThread
 
         void wczytajKarty();
         void przetasujKarty(TypKarty talia);
-        void pobierzKarte(TypKarty talia, Gracz* gracz);
-        void uzyjKarty(Karta karta, Gracz* gracz);
+        void pobierzKarte(TypKarty talia, Pionek* Pionek);
+        void uzyjKarty(Karta karta, Pionek* Pionek);
 
         void utworzPola();
         bool sprawdz_kompletnosc_terytorium(const Pole* const pole);
 
-        inline void ustawKostki(uint8_t k1,uint8_t k2){kostki_[0].ustaw(k1);kostki_[1].ustaw(k2);}
-        inline Gracz* podajBank(){return bank_;}
-        inline Pole* podajPole(uint8_t polozenie){return &pola[polozenie];}
+        inline void ustawKostki(uint8_t k1,uint8_t k2){glowneOkno_->ustawKostki(k1,k2);}
+        inline Pionek* podajBank(){return bank_;}
+        inline Pole* podajPole(uint8_t polozenie){return &pola_[polozenie];}
         inline std::string podajSciezke(){return glowneOkno_->podajSciezke();}
 
-        uint8_t policzWszystkieZiemie(Gracz *gracz);
-        uint8_t policzWszystkieLwice(Gracz *gracz);
+        uint8_t policzWszystkieZiemie(Pionek *Pionek);
+        uint8_t policzWszystkieLwice(Pionek *Pionek);
 
     public slots:
         void zmienTryb(TrybyGry tryb);

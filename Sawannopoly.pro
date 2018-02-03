@@ -11,7 +11,6 @@ INCLUDEPATH += .
 
 HEADERS += \
     src/GlowneOkno.hpp \
-    src/Gracz.hpp \
     src/inne.hpp \
     src/Karta.hpp \
     src/Pole.hpp \
@@ -20,11 +19,12 @@ HEADERS += \
     src/Silnik.hpp \
     src/Kostka.hpp \
     src/Plansza.hpp \
-    src/PoleGraficzne.hpp
+    src/PoleGraficzne.hpp \
+    src/Pionek.hpp \
+    src/Panel.hpp
 
 SOURCES += \
     src/GlowneOkno.cpp \
-    src/Gracz.cpp \
     src/inne.cpp \
     src/Karta.cpp \
     src/main.cpp \
@@ -33,6 +33,8 @@ SOURCES += \
     src/Silnik.cpp \
     src/Kostka.cpp \
     src/Plansza.cpp \
-    src/PoleGraficzne.cpp
+    src/PoleGraficzne.cpp \
+    src/Pionek.cpp \
+    src/Panel.cpp
 
 

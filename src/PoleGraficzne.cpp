@@ -17,7 +17,7 @@ PoleGraficzne::PoleGraficzne(Plansza* rodzic, uint8_t id) : QWidget(rodzic)
     std::string sciezka=rodzic_->podajSciezke();
     sciezka+="/res/";
 
-    char tmp[128];
+    //char tmp[128];
     /*strcpy(tmp,(sciezka+"bank"+".png").c_str());
     wlasciciel_=new QLabel(this);
     wlasciciel_map_=new QPixmap(tmp);
@@ -49,9 +49,9 @@ PoleGraficzne::PoleGraficzne(Plansza* rodzic, uint8_t id) : QWidget(rodzic)
 
     /*for(uint8_t ii=0;ii<4;ii++)
     {
-        gracz_[ii]=new QLabel(this);
+        Pionek_[ii]=new QLabel(this);
         strcpy(tmp,(sciezka+"puste"+".png").c_str());
-        gracz_map_[ii]=new QPixmap(tmp);
-        gracz_[ii]->setPixmap(*gracz_map_[ii]);
+        Pionek_map_[ii]=new QPixmap(tmp);
+        Pionek_[ii]->setPixmap(*Pionek_map_[ii]);
     }*/
 }

@@ -17,6 +17,7 @@
 //Nagłówki z katalogu programu
 #include "TypyWyliczeniowe.hpp"
 #include "WyborTrybu.hpp"
+#include "Panel.hpp"
 
 class Plansza;
 
@@ -36,7 +37,7 @@ class GlowneOkno : public QMainWindow
         TrybyGry tryb_;
         std::string sciezka_;
 
-        QVBoxLayout* glownyRozmieszczacz_;
+        QBoxLayout* rozmieszczacz_;
         QWidget* okno_;
         Silnik* silnik_;
         WyborTrybu* wybor_;
@@ -45,6 +46,7 @@ class GlowneOkno : public QMainWindow
         QPixmap* mypix_;
 
         Plansza* plansza_;
+        Panel* panel_;
 
 		void setupOkno(void);
 
@@ -54,8 +56,10 @@ class GlowneOkno : public QMainWindow
         void wlaczMenuGlowne();
         void wlaczGoraceKrzeslo();
 
+        inline void ustawKostki(uint8_t k1,uint8_t k2){panel_->ustawKostki(k1,k2);}
         inline void ustawTryb(TrybyGry tryb){tryb_=tryb;}
         inline std::string podajSciezke(){return sciezka_;}
+
 		
 	//public slots:
 

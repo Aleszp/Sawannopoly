@@ -49,7 +49,6 @@ OBJECTS_DIR   = obj/
 ####### Files
 
 SOURCES       = src/GlowneOkno.cpp \
-		src/Gracz.cpp \
 		src/inne.cpp \
 		src/Karta.cpp \
 		src/main.cpp \
@@ -58,13 +57,14 @@ SOURCES       = src/GlowneOkno.cpp \
 		src/Silnik.cpp \
 		src/Kostka.cpp \
 		src/Plansza.cpp \
-		src/PoleGraficzne.cpp moc/moc_GlowneOkno.cpp \
+		src/PoleGraficzne.cpp \
+		src/Pionek.cpp \
+		src/Panel.cpp moc/moc_GlowneOkno.cpp \
 		moc/moc_WyborTrybu.cpp \
 		moc/moc_Silnik.cpp \
 		moc/moc_Plansza.cpp \
 		moc/moc_PoleGraficzne.cpp
 OBJECTS       = obj/GlowneOkno.o \
-		obj/Gracz.o \
 		obj/inne.o \
 		obj/Karta.o \
 		obj/main.o \
@@ -74,6 +74,8 @@ OBJECTS       = obj/GlowneOkno.o \
 		obj/Kostka.o \
 		obj/Plansza.o \
 		obj/PoleGraficzne.o \
+		obj/Pionek.o \
+		obj/Panel.o \
 		obj/moc_GlowneOkno.o \
 		obj/moc_WyborTrybu.o \
 		obj/moc_Silnik.o \
@@ -141,7 +143,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		Sawannopoly.pro src/GlowneOkno.hpp \
-		src/Gracz.hpp \
 		src/inne.hpp \
 		src/Karta.hpp \
 		src/Pole.hpp \
@@ -150,8 +151,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/Silnik.hpp \
 		src/Kostka.hpp \
 		src/Plansza.hpp \
-		src/PoleGraficzne.hpp src/GlowneOkno.cpp \
-		src/Gracz.cpp \
+		src/PoleGraficzne.hpp \
+		src/Pionek.hpp \
+		src/Panel.hpp src/GlowneOkno.cpp \
 		src/inne.cpp \
 		src/Karta.cpp \
 		src/main.cpp \
@@ -160,7 +162,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/Silnik.cpp \
 		src/Kostka.cpp \
 		src/Plansza.cpp \
-		src/PoleGraficzne.cpp
+		src/PoleGraficzne.cpp \
+		src/Pionek.cpp \
+		src/Panel.cpp
 QMAKE_TARGET  = Sawannopoly
 DESTDIR       = 
 TARGET        = Sawannopoly
@@ -317,8 +321,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents src/GlowneOkno.hpp src/Gracz.hpp src/inne.hpp src/Karta.hpp src/Pole.hpp src/TypyWyliczeniowe.hpp src/WyborTrybu.hpp src/Silnik.hpp src/Kostka.hpp src/Plansza.hpp src/PoleGraficzne.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/GlowneOkno.cpp src/Gracz.cpp src/inne.cpp src/Karta.cpp src/main.cpp src/Pole.cpp src/WyborTrybu.cpp src/Silnik.cpp src/Kostka.cpp src/Plansza.cpp src/PoleGraficzne.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/GlowneOkno.hpp src/inne.hpp src/Karta.hpp src/Pole.hpp src/TypyWyliczeniowe.hpp src/WyborTrybu.hpp src/Silnik.hpp src/Kostka.hpp src/Plansza.hpp src/PoleGraficzne.hpp src/Pionek.hpp src/Panel.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/GlowneOkno.cpp src/inne.cpp src/Karta.cpp src/main.cpp src/Pole.cpp src/WyborTrybu.cpp src/Silnik.cpp src/Kostka.cpp src/Plansza.cpp src/PoleGraficzne.cpp src/Pionek.cpp src/Panel.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -361,22 +365,22 @@ moc/moc_WyborTrybu.cpp: src/TypyWyliczeniowe.hpp \
 moc/moc_Silnik.cpp: src/TypyWyliczeniowe.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Pole.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp \
+		src/Panel.hpp \
 		src/Silnik.hpp \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include src/Silnik.hpp -o moc/moc_Silnik.cpp
 
 moc/moc_Plansza.cpp: src/Pole.hpp \
 		src/TypyWyliczeniowe.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Silnik.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp \
+		src/Panel.hpp \
 		src/Plansza.hpp \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include src/Plansza.hpp -o moc/moc_Plansza.cpp
@@ -384,12 +388,12 @@ moc/moc_Plansza.cpp: src/Pole.hpp \
 moc/moc_PoleGraficzne.cpp: src/Plansza.hpp \
 		src/Pole.hpp \
 		src/TypyWyliczeniowe.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Silnik.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp \
+		src/Panel.hpp \
 		src/PoleGraficzne.hpp \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/data/aleszp/Documents/programowanie/C++/Sawannopoly -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include src/PoleGraficzne.hpp -o moc/moc_PoleGraficzne.cpp
@@ -412,28 +416,19 @@ obj/GlowneOkno.o: src/GlowneOkno.cpp src/GlowneOkno.hpp \
 		src/TypyWyliczeniowe.hpp \
 		src/WyborTrybu.hpp \
 		src/Silnik.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Pole.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp
+		src/Panel.hpp \
+		src/Plansza.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/GlowneOkno.o src/GlowneOkno.cpp
-
-obj/Gracz.o: src/Gracz.cpp src/Gracz.hpp \
-		src/TypyWyliczeniowe.hpp \
-		src/Pole.hpp \
-		src/Silnik.hpp \
-		src/GlowneOkno.hpp \
-		src/WyborTrybu.hpp \
-		src/Karta.hpp \
-		src/Kostka.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Gracz.o src/Gracz.cpp
 
 obj/inne.o: src/inne.cpp src/inne.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/inne.o src/inne.cpp
 
 obj/Karta.o: src/Karta.cpp src/Karta.hpp \
 		src/TypyWyliczeniowe.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/inne.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Karta.o src/Karta.cpp
 
@@ -441,21 +436,21 @@ obj/main.o: src/main.cpp src/TypyWyliczeniowe.hpp \
 		src/Silnik.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Pole.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp
+		src/Panel.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
 
 obj/Pole.o: src/Pole.cpp src/Pole.hpp \
 		src/TypyWyliczeniowe.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Karta.hpp \
 		src/inne.hpp \
 		src/Silnik.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
-		src/Kostka.hpp
+		src/Panel.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Pole.o src/Pole.cpp
 
 obj/WyborTrybu.o: src/WyborTrybu.cpp src/WyborTrybu.hpp \
@@ -466,10 +461,10 @@ obj/Silnik.o: src/Silnik.cpp src/Silnik.hpp \
 		src/TypyWyliczeniowe.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Pole.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp \
+		src/Panel.hpp \
 		src/inne.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Silnik.o src/Silnik.cpp
 
@@ -479,25 +474,39 @@ obj/Kostka.o: src/Kostka.cpp src/Kostka.hpp
 obj/Plansza.o: src/Plansza.cpp src/Plansza.hpp \
 		src/Pole.hpp \
 		src/TypyWyliczeniowe.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Silnik.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp
+		src/Panel.hpp \
+		src/PoleGraficzne.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Plansza.o src/Plansza.cpp
 
 obj/PoleGraficzne.o: src/PoleGraficzne.cpp src/PoleGraficzne.hpp \
 		src/Plansza.hpp \
 		src/Pole.hpp \
 		src/TypyWyliczeniowe.hpp \
-		src/Gracz.hpp \
+		src/Pionek.hpp \
 		src/Silnik.hpp \
 		src/GlowneOkno.hpp \
 		src/WyborTrybu.hpp \
 		src/Karta.hpp \
-		src/Kostka.hpp
+		src/Panel.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/PoleGraficzne.o src/PoleGraficzne.cpp
+
+obj/Pionek.o: src/Pionek.cpp src/Pionek.hpp \
+		src/TypyWyliczeniowe.hpp \
+		src/Pole.hpp \
+		src/Silnik.hpp \
+		src/GlowneOkno.hpp \
+		src/WyborTrybu.hpp \
+		src/Karta.hpp \
+		src/Panel.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Pionek.o src/Pionek.cpp
+
+obj/Panel.o: src/Panel.cpp src/Panel.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Panel.o src/Panel.cpp
 
 obj/moc_GlowneOkno.o: moc/moc_GlowneOkno.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_GlowneOkno.o moc/moc_GlowneOkno.cpp

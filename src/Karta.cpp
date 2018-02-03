@@ -6,7 +6,7 @@
 
 //Nagłówki z katalogu programu
 #include "Karta.hpp"
-#include "Gracz.hpp"
+#include "Pionek.hpp"
 #include "inne.hpp"
 
 Karta::Karta()
